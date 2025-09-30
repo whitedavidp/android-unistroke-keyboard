@@ -26,4 +26,6 @@ Changes to the original:
 
 5. Removed various items related to notifications and other stuff that made it difficult to build inside of my old, Eclipse environment.
 
+6. Included the Gesture Builder apk since that is used to modify the raw resources in this app.
+
 <img alt="gesture" src="./docs/images/gesture.png" width="400px">
