@@ -1,45 +1,36 @@
 package io.github.tmatz.hackers_unistroke_keyboard;
 
-import android.Manifest;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.gesture.Gesture;
 import android.gesture.GestureOverlayView;
 import android.graphics.RectF;
 import android.inputmethodservice.InputMethodService;
 import android.os.Build;
-import android.os.Handler;
 import android.os.SystemClock;
 import android.os.Vibrator;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.inputmethod.*;
-import androidx.core.app.NotificationChannelCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.PackageManagerCompat;
 
 public class GestureInputMethod
 extends InputMethodService
 implements IKeyboardService
 {
+    /*
     static private final String DEFAULT_NOTIFICATION_CANNEL = "default";
     static private final int DEFAULT_NOTIFICATION = 0;
+    */
     static private final String ACTION_OPEN_INPUT_METHOD = "custom.action.OPEN_INPUT_METHOD";
 
     private ApplicationResources resources;
@@ -129,18 +120,19 @@ implements IKeyboardService
             public void onReceive(Context context, Intent intent) {
                 switch (intent.getAction()) {
                     case ACTION_OPEN_INPUT_METHOD:
-                        if (Build.VERSION.SDK_INT >= 28) {
+                    /*    if (Build.VERSION.SDK_INT >= 28) {
                             requestShowSelf(0);
-                        }
+                        } */
                         break;
                     default:
                         break;
                 }
             }
         };
-        var filter = new IntentFilter();
+        IntentFilter filter = new IntentFilter();
         filter.addAction(ACTION_OPEN_INPUT_METHOD);
         registerReceiver(mReceiver, filter);
+        /*
         var notificationManager = NotificationManagerCompat.from(getApplicationContext());
         var channel = new NotificationChannelCompat
             .Builder(DEFAULT_NOTIFICATION_CANNEL, NotificationManagerCompat.IMPORTANCE_LOW)
@@ -157,15 +149,18 @@ implements IKeyboardService
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
             notificationManager.notify(DEFAULT_NOTIFICATION, notification);
         }
+        */
     }
 
     private void teardownNotification() {
+      /*
         var notififationManager = NotificationManagerCompat.from(getApplicationContext());
         notififationManager.cancel(DEFAULT_NOTIFICATION);
         if (mReceiver != null) {
             unregisterReceiver(mReceiver);
             mReceiver = null;
         }
+        */
     }
 
     private int getEditorAction()
@@ -227,6 +222,7 @@ implements IKeyboardService
         getCurrentInputConnection().sendKeyEvent(event);
     }
 
+    @SuppressWarnings("deprecation")
     private boolean vibrate(boolean strong)
     {
         Vibrator vibrator = (Vibrator)getSystemService(VIBRATOR_SERVICE);
@@ -234,7 +230,7 @@ implements IKeyboardService
         {
             return false;
         }
-        vibrator.vibrate(strong ? resources.VIBRATION_STRONG_MS : resources.VIBRATION_MS);
+        vibrator.vibrate(strong ? ApplicationResources.VIBRATION_STRONG_MS : ApplicationResources.VIBRATION_MS);
         return true;
     }
 
@@ -329,11 +325,13 @@ implements IKeyboardService
                     }
                 });
 
+            /*
             final OnTouchCursorGestureListener onTouchCursorGestureListener =
                 new GestureAreaOnTouchCursorGestureListener(resources, overlay, overlayNum);
 
             overlay.setOnTouchListener(onTouchCursorGestureListener);
             overlayNum.setOnTouchListener(onTouchCursorGestureListener);
+            */
         }
 
         private void setupExtendKey(final View view)
@@ -347,8 +345,17 @@ implements IKeyboardService
             extendKey.setOnTouchListener(
                 new OnTouchGestureListener(view.getContext())
                 {
+                  @Override
+                  public boolean onDoubleTap (MotionEvent e)
+                  {
+                    Intent intent = new Intent(getApplicationContext(), HelpActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    return true; 
+                  }
+                  
                     @Override
-                    public boolean onSingleTapUp(MotionEvent e)
+                    public boolean onSingleTapConfirmed(MotionEvent e)
                     {
                         toggleKeyboadOn();
                         return true;

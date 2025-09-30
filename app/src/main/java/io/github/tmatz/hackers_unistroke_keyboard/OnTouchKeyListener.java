@@ -18,9 +18,10 @@ implements OnTouchListener
         FLICK_DOWN,
     }
 
-    private final ApplicationResources resources;
+    //private final ApplicationResources resources;
     private final int keyCode;
     private final PrivateKeyGestureDetector detector;
+    private ApplicationResources resources;
 
     public OnTouchKeyListener(Context context, ApplicationResources resources, int keyCode)
     {
@@ -72,7 +73,7 @@ implements OnTouchListener
         public void run()
         {
             onKeyRepeat(keyCode);
-            mView.postDelayed(this, resources.KEYREPEAT_DELAY_MS);
+            mView.postDelayed(this, ApplicationResources.KEYREPEAT_DELAY_MS);
         }
 
         public boolean onTouchEvent(View view, MotionEvent e)
@@ -153,7 +154,7 @@ implements OnTouchListener
             onKeyDown(keyCode);
             if (!KeyEvent.isModifierKey(keyCode))
             {
-                mView.postDelayed(this, resources.KEYREPEAT_DELAY_MS);
+                mView.postDelayed(this, ApplicationResources.KEYREPEAT_DELAY_MS);
             }
         }
 

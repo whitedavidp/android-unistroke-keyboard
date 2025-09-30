@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="button_width">40dip</dimen>
-    <dimen name="button_height">36dip</dimen>
-    <dimen name="cursor_tolerance">20dip</dimen>
-    <dimen name="period_tolerance">5dip</dimen>
-    <dimen name="layout_margin">3dip</dimen>
-    <dimen name="gestures_overlay_num_width">0dip</dimen>    
+
+    <dimen name="button_height">60.0dip</dimen>
+    <dimen name="button_width">40.0dip</dimen>
+    <dimen name="cursor_tolerance">20.0dip</dimen>
+    <dimen name="gestures_overlay_num_width">0.0dip</dimen>
+    <dimen name="layout_margin">3.0dip</dimen>
+    <dimen name="period_tolerance">5.0dip</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
 </resources>
