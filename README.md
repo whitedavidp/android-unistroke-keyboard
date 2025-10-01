@@ -12,7 +12,7 @@ Unistroke Handwriting Input Method for Programming
 * Right pane for number.
 * Tap enters special key mode.
 * KEY button shows some useful key buttons.
-* Long press enters cursor mode.
+* Long press enters cursor mode. REMOVED
 
 Changes to the original:
 
