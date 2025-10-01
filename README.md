@@ -28,6 +28,6 @@ Changes to the original:
 
 6. Included the Gesture Builder apk since that is used to modify the raw resources in this app.
 
-7. Added Graffiti Return/Enter stroke (on alphabet/left side only).
+7. Added Graffiti Return/Enter stroke.
 
 <img alt="gesture" src="./docs/images/gesture.png" width="400px">
