@@ -26,7 +26,8 @@ Changes to the original:
 
 5. Removed various items related to notifications and other stuff that made it difficult to build inside of my old, Eclipse environment.
 
-6. Included the Gesture Builder apk since that is used to modify the raw resources in this app.
+6. Included the Gesture Builder apk since that is used to modify the raw resources in this app. (Note: this build of Gesture Builder is my own and differs from the one included in the SDK. It has a test activity and it is using a 3rd party recognizer in
+the test activity called Point Cloud - see http://depts.washington.edu/acelab/proj/dollar/pdollar.html for details - so the quality of reported recognition may not match that of the keyboard code.)
 
 7. Added Graffiti Return/Enter stroke.
 
