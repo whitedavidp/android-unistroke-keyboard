@@ -1,4 +1,4 @@
-package io.github.tmatz.hackers_unistroke_keyboard;
+package com.whitedavidp.unistroke_keyboard;
 
 import android.graphics.RectF;
 import android.view.KeyEvent;
@@ -255,7 +255,7 @@ implements OnTouchListener
         {
             track.view().removeCallbacks(this);
             track.clear();
-            if (mState != mState.START)
+            if (mState != State.START)
             {
                 onFinish();
             }

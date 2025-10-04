@@ -1,4 +1,4 @@
-package io.github.tmatz.hackers_unistroke_keyboard;
+package com.whitedavidp.unistroke_keyboard;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -18,7 +18,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.view.inputmethod.*;
 
 public class GestureInputMethod
@@ -552,7 +551,7 @@ implements IKeyboardService
                 return flags;
             }
         }
-
+/*
         private class GestureAreaOnTouchCursorGestureListener
         extends OnTouchCursorGestureListener
         {
@@ -606,6 +605,7 @@ implements IKeyboardService
                 super.onStart();
             }
         };
+        */
     }
 }
 

@@ -1,4 +1,4 @@
-package io.github.tmatz.hackers_unistroke_keyboard;
+package com.whitedavidp.unistroke_keyboard;
 
 import android.view.MotionEvent;
 import android.view.View;

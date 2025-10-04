@@ -1,9 +1,7 @@
-package io.github.tmatz.hackers_unistroke_keyboard;
+package com.whitedavidp.unistroke_keyboard;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.os.Environment;
 import android.webkit.WebView;
 
 public class HelpActivity extends Activity

@@ -1,10 +1,11 @@
-package io.github.tmatz.hackers_unistroke_keyboard;
+package com.whitedavidp.unistroke_keyboard;
 
 import android.content.Context;
 import android.gesture.Gesture;
 import android.gesture.GestureLibraries;
 import android.gesture.GestureLibrary;
 import android.gesture.Prediction;
+
 import java.util.ArrayList;
 
 class GestureStore
@@ -55,6 +56,8 @@ class GestureStore
         public WeightedGestureLibrary load(double weight, int rawId, int category)
         {
             GestureLibrary library = GestureLibraries.fromRawResource(context, rawId);
+            // note: I fooled around with the settings shown here: https://stackoverflow.com/questions/7743462/does-having-variations-of-gestures-in-gesture-library-improve-recognition
+            // with only worse results. so I leave this as-is. the libraries should be SEQUENCE_SENSITIVE by default
             library.setOrientationStyle(8);
             library.load();
             return new WeightedGestureLibrary(library, category, weight);
