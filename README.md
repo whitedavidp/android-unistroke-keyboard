@@ -31,4 +31,6 @@ the test activity called Point Cloud - see http://depts.washington.edu/acelab/pr
 
 7. Added Graffiti Return/Enter stroke.
 
+8. Changed package id to avoid collisions as suggested here: https://github.com/tmatz/android-unistroke-keyboard/issues/28#issuecomment-3368561049
+
 <img alt="gesture" src="./docs/images/gesture.png" width="400px">
