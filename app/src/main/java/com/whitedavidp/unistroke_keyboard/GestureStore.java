@@ -5,7 +5,8 @@ import android.gesture.Gesture;
 import android.gesture.GestureLibraries;
 import android.gesture.GestureLibrary;
 import android.gesture.Prediction;
-
+import android.os.Environment;
+import java.io.File;
 import java.util.ArrayList;
 
 class GestureStore
@@ -51,15 +52,82 @@ class GestureStore
         public Loader(Context context)
         {
             this.context = context;
-        }
+        }        
 
         public WeightedGestureLibrary load(double weight, int rawId, int category)
         {
-            GestureLibrary library = GestureLibraries.fromRawResource(context, rawId);
+            String fileName = null;
+            GestureLibrary library = null;
+            
+            switch(rawId)
+            {
+              case R.raw.gestures_alphabet:
+              {
+                fileName = "gestures_alphabet";
+                break;
+              }
+              case R.raw.gestures_number:
+              {
+                fileName = "gestures_number";
+                break;
+              }
+              case R.raw.gestures_special:
+              {
+                fileName = "gestures_special";
+                break;
+              }
+              case R.raw.gestures_control:
+              {
+                fileName = "gestures_control";
+                break;
+              }  
+              default:
+              {
+                fileName = null;
+              }
+            }
+            
+            if(App.isLoadFromFilesEnabled())
+            {
+              // if we find a file with the expected name in the root of the device's internal storage, use it
+              // note: this requires we target older sdk (as does the Gesture Builder app)
+              if(null != fileName)
+              {
+                File f = new File(Environment.getExternalStorageDirectory(), fileName);
+                if(f.exists() && f.canRead())
+                {
+                  library = GestureLibraries.fromFile(f);
+                  if(null != library)
+                  {
+                    App.Log(fileName, "gestures for " + fileName + " loaded from storage");
+                  }
+                  else
+                  {
+                    App.Log(fileName, "gestures for " + fileName + " failed to load from storage");
+                  }
+                }
+                else
+                {
+                  App.Log(fileName, "File exists: " + f.exists() + ", Can be read: " + f.canRead());
+                }
+              }
+            }
+            
+            if(null == library)
+            {
+              App.Log(fileName, "Loading " + fileName + " from resources");
+              library = GestureLibraries.fromRawResource(context, rawId);
+            }
+            
             // note: I fooled around with the settings shown here: https://stackoverflow.com/questions/7743462/does-having-variations-of-gestures-in-gesture-library-improve-recognition
             // with only worse results. so I leave this as-is. the libraries should be SEQUENCE_SENSITIVE by default
             library.setOrientationStyle(8);
-            library.load();
+            boolean successfulLoad = library.load();
+            if(!successfulLoad)
+            {
+              App.Log(fileName, "Library " + fileName + " did not load properly");
+            }
+            
             return new WeightedGestureLibrary(library, category, weight);
         }
     }
@@ -76,7 +144,7 @@ class GestureStore
             this.category = category;
             this.weight = weight;
         }
-
+        
         public PredictionResult recognize(Gesture gesture, int flags)
         {
             if (gesture.getLength() < resources.getPeriodTolerance())

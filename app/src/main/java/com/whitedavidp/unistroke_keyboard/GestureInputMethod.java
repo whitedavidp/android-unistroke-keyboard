@@ -30,7 +30,6 @@ implements IKeyboardService
     */
     static private final String ACTION_OPEN_INPUT_METHOD = "custom.action.OPEN_INPUT_METHOD";
 
-    private ApplicationResources resources;
     private ViewController mViewController;
     private final KeyboardViewModel mViewModel = new KeyboardViewModel(this);
     private BroadcastReceiver mReceiver;
@@ -39,7 +38,6 @@ implements IKeyboardService
     public void onCreate()
     {
         super.onCreate();
-        resources = new ApplicationResources(getApplicationContext());
         mViewController = new ViewController();
     }
 
@@ -219,7 +217,6 @@ implements IKeyboardService
         getCurrentInputConnection().sendKeyEvent(event);
     }
 
-    @SuppressWarnings("deprecation")
     private boolean vibrate(boolean strong)
     {
         Vibrator vibrator = (Vibrator)getSystemService(VIBRATOR_SERVICE);
@@ -263,10 +260,10 @@ implements IKeyboardService
 
         private void setupMainView(View view)
         {
-            mCenterPanel = view.findViewById(R.id.center_panel);
-            mButtonShift = view.findViewById(R.id.button_shift);
-            mButtonCtrl = view.findViewById(R.id.button_ctrl);
-            mButtonAlt = view.findViewById(R.id.button_alt);
+            mCenterPanel = (ViewGroup) view.findViewById(R.id.center_panel);
+            mButtonShift = (Button) view.findViewById(R.id.button_shift);
+            mButtonCtrl = (Button) view.findViewById(R.id.button_ctrl);
+            mButtonAlt = (Button) view.findViewById(R.id.button_alt);
 
             setupGestureOverlays(view);
             setupButtonKey(view, R.id.button_shift);
@@ -297,8 +294,8 @@ implements IKeyboardService
 
         private void setupGestureOverlays(View view)
         {
-            final GestureOverlayView overlay = view.findViewById(R.id.gestures_overlay);
-            final GestureOverlayView overlayNum = view.findViewById(R.id.gestures_overlay_num);
+            final GestureOverlayView overlay = (GestureOverlayView) view.findViewById(R.id.gestures_overlay);
+            final GestureOverlayView overlayNum = (GestureOverlayView) view.findViewById(R.id.gestures_overlay_num);
 
             overlay.addOnGestureListener(
                 new OnGestureUnistrokeListener(GestureStore.FLAG_CATEGORY_ALPHABET)
@@ -335,7 +332,7 @@ implements IKeyboardService
         {
             final View keyboardArea = view.findViewById(R.id.keyboard_area);
             final View gestureArea = view.findViewById(R.id.gesture_area);
-            final Button extendKey = view.findViewById(R.id.button_key);
+            final Button extendKey = (Button) view.findViewById(R.id.button_key);
 
             keyboardArea.setVisibility(View.INVISIBLE);
 
@@ -382,13 +379,13 @@ implements IKeyboardService
 
         private void setupButtonKey(View rootView, int id)
         {
-            final Button button = rootView.findViewById(id);
-            final String tag = (String)button.getTag();
+            final Button button = (Button) rootView.findViewById(id);
+            final String tag = (String) button.getTag();
             final int keyCode = KeyEventUtils.keyCodeFromTag(tag);
             if (keyCode != KeyEvent.KEYCODE_UNKNOWN)
             {
                 button.setOnTouchListener(
-                    new OnTouchKeyListener(GestureInputMethod.this, resources, keyCode)
+                    new OnTouchKeyListener(GestureInputMethod.this, keyCode)
                     {
                         @Override
                         protected void onKeyDown(int keyCode)
@@ -454,6 +451,7 @@ implements IKeyboardService
             mInfoView.setNumberActive();
         }
 
+        @SuppressWarnings("unused")
         public RectF getCenterRect()
         {
             return ViewUtils.getViewRect(mCenterPanel);
@@ -467,8 +465,8 @@ implements IKeyboardService
 
             public void setup(View view)
             {
-                mInfo = view.findViewById(R.id.info);
-                mInfoNum = view.findViewById(R.id.info_num);
+                mInfo = (TextView) view.findViewById(R.id.info);
+                mInfoNum = (TextView) view.findViewById(R.id.info_num);
                 mInfoCurrent = mInfo;
             }
 
@@ -512,7 +510,7 @@ implements IKeyboardService
             public void onGestureEnded(GestureOverlayView overlay, MotionEvent e)
             {
                 Gesture gesture = overlay.getGesture();
-                PredictionResult prediction = resources.gestures.recognize(gesture, makeFlags());
+                PredictionResult prediction = App.getApplicationResources().gestures.recognize(gesture, makeFlags());
                 if (prediction.score == 0)
                 {
                     vibrate(true);

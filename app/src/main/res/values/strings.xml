@@ -6,5 +6,12 @@
     <string name="default_notification_channel">default channel</string>
     <string name="open_input_method">Open input method</string>
     <string name="title_activity_help">Unistroke Help</string>
+    <string name="open_settings_instructions">Press the button below to make sure that this input method is enabled.</string>
+    <string name="open_settings_button">Open system input settings</string>
+    <string name="load_from_files">Load gestures from internal storage (if available)</string>
+    <string name="enable_logcat">Enable logcat output</string>
+    <string name="default_strokes">Default Gesture Strokes (scrolls and pinch to zoom)</string>
+    <string name="reload_gestures_instructions">Press the button below to make sure that changes to gesture files or sources are appplied. Force stop of the app will also work.</string>
+    <string name="reload_gestures">Force Reload of Gestures</string>
 
 </resources>

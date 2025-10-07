@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
    
-    tools:context="io.github.tmatz.hackers_unistroke_keyboard.HelpActivity" >
+    tools:context="com.whitedavidp.unistroke_keyboard.HelpActivity" >
 
     <WebView
         android:id="@+id/helpview"

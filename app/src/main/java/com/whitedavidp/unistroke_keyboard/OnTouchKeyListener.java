@@ -18,14 +18,11 @@ implements OnTouchListener
         FLICK_DOWN,
     }
 
-    //private final ApplicationResources resources;
     private final int keyCode;
     private final PrivateKeyGestureDetector detector;
-    private ApplicationResources resources;
 
-    public OnTouchKeyListener(Context context, ApplicationResources resources, int keyCode)
+    public OnTouchKeyListener(Context context, int keyCode)
     {
-        this.resources = resources;
         this.keyCode = keyCode;
         this.detector = new PrivateKeyGestureDetector(context);
     }
