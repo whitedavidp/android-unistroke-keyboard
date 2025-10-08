@@ -63,25 +63,24 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
     />
-
-    <TextView
+    
+    <CheckBox android:id="@+id/checkResults"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/default_strokes"
+        android:text="@string/enable_results"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        android:textStyle="bold"
     />
     
-    <WebView
-        android:id="@+id/viewHelp"
-        android:layout_width="match_parent"
+    <Button android:id="@+id/buttonShowHelp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/show_help"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
     />
     
 </LinearLayout>

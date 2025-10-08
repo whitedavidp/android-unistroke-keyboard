@@ -13,6 +13,7 @@ public class App extends Application
 {
   private static final String ENABLE_FILE_LOAD_PREF = "LOAD_FROM_FILES";
   private static final String ENABLE_LOGGING_PREF = "PERFORM_LOGGING";
+  private static final String ENABLE_SHOW_RESULTS_PREF = "SHOW_RESULTS";
   protected static String TAG = "_App";
   private static Context context = null;
   private static ApplicationResources resources = null;
@@ -78,7 +79,7 @@ public class App extends Application
 
   static boolean isLoadFromFilesEnabled()
   {
-   return getPrefs().getBoolean(ENABLE_LOGGING_PREF, false);
+   return getPrefs().getBoolean(ENABLE_FILE_LOAD_PREF, false);
   }
   
   static void setLoadFromFiles(boolean isEnabled)
@@ -96,6 +97,18 @@ public class App extends Application
     }
   }
   
+  static void setShowResults(boolean isEnabled)
+  {
+    Editor e = getPrefs().edit();
+    e.putBoolean(ENABLE_SHOW_RESULTS_PREF, isEnabled);
+    e.commit();
+  }
+  
+  static boolean isShowResultsEnabled()
+  {
+   return getPrefs().getBoolean(ENABLE_SHOW_RESULTS_PREF, false);
+  }
+  
   static Context getAppContext()
   {
     return context;
@@ -108,7 +121,7 @@ public class App extends Application
   
   static void showToast(String msg)
   {
-    Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+    SingleToast.show(context, msg, Toast.LENGTH_SHORT);
   }
   
   static void reloadGestures()
@@ -116,3 +129,4 @@ public class App extends Application
     App.resources = new ApplicationResources(getAppContext());
   }
 }
+

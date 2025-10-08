@@ -1,9 +1,11 @@
 package com.whitedavidp.unistroke_keyboard;
 
+import android.app.Application;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.gesture.Gesture;
 import android.gesture.GestureOverlayView;
 import android.graphics.RectF;
@@ -11,6 +13,7 @@ import android.inputmethodservice.InputMethodService;
 import android.os.Build;
 import android.os.SystemClock;
 import android.os.Vibrator;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -246,7 +249,14 @@ implements IKeyboardService
 
         public View onCreateInputView()
         {
-            final View mainView = getLayoutInflater().inflate(R.layout.input_method, null);
+            int layoutToUse = R.layout.input_method;
+            
+            if(Resources.getSystem().getDisplayMetrics().heightPixels <= 1920)
+            {
+              layoutToUse =R.layout.input_method_small;
+            }
+            
+            final View mainView = getLayoutInflater().inflate(layoutToUse, null);
 
             setupMainView(mainView);
             setupKeyboardView(mainView);
@@ -512,6 +522,7 @@ implements IKeyboardService
                 Gesture gesture = overlay.getGesture();
                 PredictionResult prediction = App.getApplicationResources().gestures.recognize(gesture, makeFlags());
                 if (prediction.score == 0)
+                //if (prediction.score < 1.5)
                 {
                     vibrate(true);
                     return;

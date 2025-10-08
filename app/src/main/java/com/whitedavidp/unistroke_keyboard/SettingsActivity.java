@@ -14,17 +14,16 @@ public class SettingsActivity extends Activity implements OnClickListener
 {
   private CheckBox chkFiles = null;
   private CheckBox chkLogcat = null;
+  private CheckBox chkResults = null;
   private Button btnInputSettings = null;
   private Button btnReloadGestures = null;
+  private Button btnShowHelp = null;
   
   @Override
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_settings);
-    WebView browser = (WebView) findViewById(R.id.viewHelp);
-    browser.setInitialScale(100);
-    browser.loadUrl("file:///android_asset/help.png");
     btnInputSettings = (Button) findViewById(R.id.buttonInputSettings);
     btnInputSettings.setOnClickListener(this);
     chkFiles = (CheckBox) findViewById(R.id.checkFiles);
@@ -35,6 +34,11 @@ public class SettingsActivity extends Activity implements OnClickListener
     chkLogcat = (CheckBox) findViewById(R.id.checkLogging);
     chkLogcat.setOnClickListener(this);
     chkLogcat.setChecked(App.isLoggingEnabled());
+    chkResults = (CheckBox) findViewById(R.id.checkResults);
+    chkResults.setOnClickListener(this);
+    chkResults.setChecked(App.isShowResultsEnabled());
+    btnShowHelp = (Button) findViewById(R.id.buttonShowHelp);
+    btnShowHelp.setOnClickListener(this);
   }
 
   @Override
@@ -61,6 +65,19 @@ public class SettingsActivity extends Activity implements OnClickListener
     {
       App.reloadGestures();
       App.showToast("Gestures have been reloaded");
+    }
+  
+    if(v == btnShowHelp)
+    {
+      Intent intent = new Intent(getApplicationContext(), HelpActivity.class);
+      intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+      startActivity(intent);
+    }
+  
+    if(v == chkResults)
+    {
+      App.setShowResults(chkResults.isChecked());
+      App.showToast("Results to be shown: " + chkResults.isChecked());
     }
   }
 }
