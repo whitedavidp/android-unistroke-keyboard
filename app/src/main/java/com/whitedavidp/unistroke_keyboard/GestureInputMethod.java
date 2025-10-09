@@ -302,9 +302,7 @@ implements IKeyboardService
                   @Override
                   public boolean onDoubleTap (MotionEvent e)
                   {
-                    Intent intent = new Intent(getApplicationContext(), HelpActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    App.showHelp();
                     return true; 
                   }
                   

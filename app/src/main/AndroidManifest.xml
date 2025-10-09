@@ -39,6 +39,7 @@
         </activity>
         <activity
             android:name=".HelpActivity"
+            android:excludeFromRecents="true"
             android:theme="@android:style/Theme.Dialog"
             android:label="@string/title_activity_help" >
         </activity>

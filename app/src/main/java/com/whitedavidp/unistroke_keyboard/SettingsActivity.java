@@ -39,6 +39,13 @@ public class SettingsActivity extends Activity implements OnClickListener
     btnShowHelp = (Button) findViewById(R.id.buttonShowHelp);
     btnShowHelp.setOnClickListener(this);
   }
+  
+  @Override
+  public void onBackPressed()
+  {
+    super.onBackPressed();
+    finish();
+  }
 
   @Override
   public void onClick(View v)
@@ -68,9 +75,7 @@ public class SettingsActivity extends Activity implements OnClickListener
   
     if(v == btnShowHelp)
     {
-      Intent intent = new Intent(getApplicationContext(), HelpActivity.class);
-      intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-      startActivity(intent);
+      App.showHelp();
     }
   
     if(v == chkResults)

@@ -2,6 +2,7 @@ package com.whitedavidp.unistroke_keyboard;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
@@ -116,5 +117,13 @@ public class App extends Application
   static void reloadGestures()
   {
     App.resources = new ApplicationResources(getAppContext());
+  }
+
+  public static void showHelp()
+  {
+    Intent intent = new Intent(context, HelpActivity.class);
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    context.startActivity(intent);
+
   }
 }
