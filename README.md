@@ -1,9 +1,5 @@
 # android-unistroke-keyboard
 
-![Android CI](https://github.com/tmatz/android-unistroke-keyboard/workflows/Android%20CI/badge.svg)
-[![codebeat badge](https://codebeat.co/badges/0ef814df-ee55-41f1-9af7-03c17807479d)](https://codebeat.co/projects/github-com-tmatz-android-unistroke-keyboard-master)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/180a8cae4ef744ee83d9b5103a5c2fd6)](https://app.codacy.com/gh/tmatz/android-unistroke-keyboard/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
-
 Unistroke Handwriting Input Method for Programming
 
 <img alt="screenshot" src="./docs/images/screenshot.png" width="400px">
@@ -12,7 +8,7 @@ Unistroke Handwriting Input Method for Programming
 * Right pane for number.
 * Tap enters special key mode.
 * KEY button shows some useful key buttons.
-* Long press enters cursor mode. REMOVED
+REMOVED * Long press enters cursor mode. REMOVED
 
 Changes to the original:
 
@@ -22,7 +18,7 @@ Changes to the original:
 
 3. Added double-tap of Key button to show pop-up of the cheat sheet.
 
-4. Some changess to the alphabet gestures - added to "y" and "g" to make them more compatible with their Graffiti analogs. Changed them for "b" and "e" entirely due to frustrating, consistent mis-recognition.
+4. Some changes to the alphabet gestures - added to "y" and "g" to make them more compatible with their Graffiti analogs. Changed them for "b" and "e" entirely due to frustrating, consistent mis-recognition.
 
 5. Removed various items related to notifications and other stuff that made it difficult to build inside of my old, Eclipse environment. NOTE: due to lack of a modern build environment and the use of an older target SDK to avoid file access issues,
 there is no expectation this will build properly without at least some modifications to those configs.
@@ -34,9 +30,13 @@ the test activity called Point Cloud - see http://depts.washington.edu/acelab/pr
 
 8. Changed package id to avoid collisions as suggested here: https://github.com/tmatz/android-unistroke-keyboard/issues/28#issuecomment-3368561049
 
-9. Optionally allow the app to read gestures from files of the appropriate names stored in the root of internal storage. This makes experimenting with gestures easier as no recompiling it required. However, it does require lowering the target SDK. So Android may
+9. Added settings panel as launcher icon. Options include:
+
+ * Log some information to the system logcat. You will need to use ADB or a logcat app to view this information.
+
+ * Allow the app to read gestures from files of the appropriate names stored in the root of internal storage. This makes experimenting with gestures easier as no recompiling it required. However, it does require lowering the target SDK. So Android may
 "warn" you. Results of this are shown in the app's logcat (if optionally enabled).
 
-10.Added settings panel as launcher icon.
+ * Show gesture recognition results/scores at the bottom of the input area.
 
 <img alt="gesture" src="./docs/images/gesture.png" width="400px">

@@ -13,7 +13,7 @@ public class HelpActivity extends Activity
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_help);
     WebView browser = (WebView) findViewById(R.id.helpview);
-    browser.setInitialScale(100);
+    //browser.setInitialScale(100);
     browser.loadUrl("file:///android_asset/help.png");
   }
 }

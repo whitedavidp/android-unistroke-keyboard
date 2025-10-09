@@ -1,10 +1,7 @@
 package com.whitedavidp.unistroke_keyboard;
 
-import android.app.Application;
-import android.content.BroadcastReceiver;
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.gesture.Gesture;
 import android.gesture.GestureOverlayView;
@@ -13,7 +10,6 @@ import android.inputmethodservice.InputMethodService;
 import android.os.Build;
 import android.os.SystemClock;
 import android.os.Vibrator;
-import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,15 +23,8 @@ public class GestureInputMethod
 extends InputMethodService
 implements IKeyboardService
 {
-    /*
-    static private final String DEFAULT_NOTIFICATION_CANNEL = "default";
-    static private final int DEFAULT_NOTIFICATION = 0;
-    */
-    static private final String ACTION_OPEN_INPUT_METHOD = "custom.action.OPEN_INPUT_METHOD";
-
-    private ViewController mViewController;
+    private static ViewController mViewController = null;
     private final KeyboardViewModel mViewModel = new KeyboardViewModel(this);
-    private BroadcastReceiver mReceiver;
 
     @Override
     public void onCreate()
@@ -44,6 +33,11 @@ implements IKeyboardService
         mViewController = new ViewController();
     }
 
+    static ViewController getViewController()
+    {
+      return mViewController;
+    }
+    
     @Override
     public void onDestroy()
     {
@@ -76,7 +70,6 @@ implements IKeyboardService
     @Override
     public void onFinishInput() {
         super.onFinishInput();
-        teardownNotification();
      }
 
     @Override
@@ -94,71 +87,16 @@ implements IKeyboardService
     @Override
     public void onWindowHidden() {
         super.onWindowHidden();
-        setupNotification();
     }
 
     @Override
     public void onWindowShown() {
         super.onWindowShown();
-        teardownNotification();
     }
 
     public void updateView()
     {
         mViewController.update();
-    }
-
-    private void setupNotification()
-    {
-        if (Build.VERSION.SDK_INT < 28) {
-            return;
-        }
-        mReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                switch (intent.getAction()) {
-                    case ACTION_OPEN_INPUT_METHOD:
-                    /*    if (Build.VERSION.SDK_INT >= 28) {
-                            requestShowSelf(0);
-                        } */
-                        break;
-                    default:
-                        break;
-                }
-            }
-        };
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(ACTION_OPEN_INPUT_METHOD);
-        registerReceiver(mReceiver, filter);
-        /*
-        var notificationManager = NotificationManagerCompat.from(getApplicationContext());
-        var channel = new NotificationChannelCompat
-            .Builder(DEFAULT_NOTIFICATION_CANNEL, NotificationManagerCompat.IMPORTANCE_LOW)
-            .setName(getString(R.string.default_notification_channel))
-            .build();
-        notificationManager.createNotificationChannel(channel);
-        var notification = new NotificationCompat.Builder(getApplicationContext(), DEFAULT_NOTIFICATION_CANNEL)
-            .setSmallIcon(android.R.drawable.ic_menu_edit)
-            .setContentTitle(getString(R.string.open_input_method))
-            .setContentIntent(PendingIntent.getBroadcast(this, 0, new Intent(ACTION_OPEN_INPUT_METHOD), PendingIntent.FLAG_IMMUTABLE))
-            .setOngoing(true)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .build();
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
-            notificationManager.notify(DEFAULT_NOTIFICATION, notification);
-        }
-        */
-    }
-
-    private void teardownNotification() {
-      /*
-        var notififationManager = NotificationManagerCompat.from(getApplicationContext());
-        notififationManager.cancel(DEFAULT_NOTIFICATION);
-        if (mReceiver != null) {
-            unregisterReceiver(mReceiver);
-            mReceiver = null;
-        }
-        */
     }
 
     private int getEditorAction()
@@ -239,13 +177,14 @@ implements IKeyboardService
         }
     }
 
-    private class ViewController
+    class ViewController
     {
         private ViewGroup mCenterPanel;
         private Button mButtonShift;
         private Button mButtonCtrl;
         private Button mButtonAlt;
         private final InfoView mInfoView = new InfoView();
+        private View mainView = null;
 
         public View onCreateInputView()
         {
@@ -253,10 +192,11 @@ implements IKeyboardService
             
             if(Resources.getSystem().getDisplayMetrics().heightPixels <= 1920)
             {
-              layoutToUse =R.layout.input_method_small;
+              layoutToUse = R.layout.input_method_small;
             }
             
-            final View mainView = getLayoutInflater().inflate(layoutToUse, null);
+            mainView = getLayoutInflater().inflate(layoutToUse, null);
+            showResults();
 
             setupMainView(mainView);
             setupKeyboardView(mainView);
@@ -266,6 +206,24 @@ implements IKeyboardService
             update();
 
             return mainView;
+        }
+        
+        public void displayResults(String msg)
+        {
+          TextView txtResults = (TextView) mainView.findViewById(R.id.text_results);
+          if(txtResults.getVisibility() == View.VISIBLE)
+          {
+            txtResults.setText(msg);
+          }
+        }
+        
+        public void showResults()
+        {
+          if(null != mainView)
+          {
+            TextView txtResults = (TextView) mainView.findViewById(R.id.text_results);
+            txtResults.setVisibility((App.isShowResultsEnabled()) ? View.VISIBLE : View.GONE);
+          }
         }
 
         private void setupMainView(View view)
@@ -328,14 +286,6 @@ implements IKeyboardService
                         super.onGestureEnded(overlay, e);
                     }
                 });
-
-            /*
-            final OnTouchCursorGestureListener onTouchCursorGestureListener =
-                new GestureAreaOnTouchCursorGestureListener(resources, overlay, overlayNum);
-
-            overlay.setOnTouchListener(onTouchCursorGestureListener);
-            overlayNum.setOnTouchListener(onTouchCursorGestureListener);
-            */
         }
 
         private void setupExtendKey(final View view)
@@ -415,10 +365,11 @@ implements IKeyboardService
                             mViewModel.keyRepeat(keyCode);
                         }
 
+                        @SuppressLint("InlinedApi")
                         @Override
                         protected void onFlick(int keyCode, FlickDirection direction)
                         {
-                            if (keyCode == KeyEvent.KEYCODE_DEL && direction == FlickDirection.FLICK_LEFT)
+                            if (Build.VERSION.SDK_INT > 10 && keyCode == KeyEvent.KEYCODE_DEL && direction == FlickDirection.FLICK_LEFT)
                             {
                                 mViewModel.key(KeyEvent.KEYCODE_FORWARD_DEL);
                             }
@@ -461,7 +412,6 @@ implements IKeyboardService
             mInfoView.setNumberActive();
         }
 
-        @SuppressWarnings("unused")
         public RectF getCenterRect()
         {
             return ViewUtils.getViewRect(mCenterPanel);
@@ -560,61 +510,6 @@ implements IKeyboardService
                 return flags;
             }
         }
-/*
-        private class GestureAreaOnTouchCursorGestureListener
-        extends OnTouchCursorGestureListener
-        {
-            private final GestureOverlayView[] overlay;
-
-            public GestureAreaOnTouchCursorGestureListener(ApplicationResources resources, GestureOverlayView ...overlay)
-            {
-                super(resources);
-                this.overlay = overlay;
-            }
-
-            @Override
-            protected boolean isSpecialOn()
-            {
-                return mViewModel.isSpecialOn();
-            }
-
-            @Override
-            protected boolean isModifierOn()
-            {
-                return mViewModel.isCtrlOn() || mViewModel.isAltOn();
-            }
-
-            @Override
-            protected void onKey(int keyCode)
-            {
-                mViewModel.key(keyCode);
-            }
-
-            @Override
-            protected RectF getBounds()
-            {
-                return getCenterRect();
-            }
-
-            @Override
-            protected void onStart()
-            {
-                mViewController.update();
-
-                if (!vibrate(false))
-                {
-                    Toast.makeText(GestureInputMethod.this, "cursor mode", Toast.LENGTH_SHORT).show();
-                }
-
-                for (GestureOverlayView v: overlay)
-                {
-                    v.clear(false);
-                }
-
-                super.onStart();
-            }
-        };
-        */
     }
 }
 

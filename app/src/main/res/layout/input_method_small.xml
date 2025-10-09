@@ -157,6 +157,15 @@
         </LinearLayout>
 
     </LinearLayout>
-
+    
+    <TextView
+        android:id="@+id/text_results"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@drawable/button"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/text_color"/>
+    
 </LinearLayout>
 

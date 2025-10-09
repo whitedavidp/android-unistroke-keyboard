@@ -31,29 +31,7 @@ public class App extends Application
     super.onCreate();
     context = getApplicationContext();
     resources = new ApplicationResources(getApplicationContext());
-    
-    // according to the docs, this should be done as early in the app processing as possible
-    // createNotificationChannel();
   }
-  
-  /* private void createNotificationChannel()
-  {
-    // Create the NotificationChannel, but only on API 26+ because
-    // the NotificationChannel class is new and not in the support library
-    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-    {
-      CharSequence name = getString(R.string.notificationChannelName);
-      String description = getString(R.string.notificationChannelDesc);
-      int importance = NotificationManager.IMPORTANCE_DEFAULT;
-      NotificationChannel channel = new NotificationChannel(Util.NOTIFICATION_CHANNEL_ID, name, importance);
-      channel.setDescription(description);
-      // Register the channel with the system; you can't change the importance
-      // or other notification behaviors after this
-      NotificationManager notificationManager = getSystemService(NotificationManager.class);
-      notificationManager.createNotificationChannel(channel);
-    }
-  }
-  */
   
   static SharedPreferences getPrefs()
   {
@@ -102,11 +80,22 @@ public class App extends Application
     Editor e = getPrefs().edit();
     e.putBoolean(ENABLE_SHOW_RESULTS_PREF, isEnabled);
     e.commit();
+    
+    // the view controller may not yet have been created
+    if(GestureInputMethod.getViewController() != null)
+    {
+      GestureInputMethod.getViewController().showResults();
+    }
   }
   
   static boolean isShowResultsEnabled()
   {
    return getPrefs().getBoolean(ENABLE_SHOW_RESULTS_PREF, false);
+  }
+  
+  static void displayResults(String msg)
+  {
+    GestureInputMethod.getViewController().displayResults(msg); 
   }
   
   static Context getAppContext()
@@ -121,7 +110,7 @@ public class App extends Application
   
   static void showToast(String msg)
   {
-    SingleToast.show(context, msg, Toast.LENGTH_SHORT);
+    Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
   }
   
   static void reloadGestures()
@@ -129,4 +118,3 @@ public class App extends Application
     App.resources = new ApplicationResources(getAppContext());
   }
 }
-

@@ -44,7 +44,7 @@ class GestureStore
 
         if(App.isShowResultsEnabled())
         {
-          App.showToast("Recognition result: " + ((null == prediction.name) ? "unrecognized" : prediction.name) + " / " + prediction.score);
+          App.displayResults("Recognition result: " + ((null == prediction.name) ? "unrecognized" : prediction.name) + " / " + prediction.score);
         }
         
         return prediction;
