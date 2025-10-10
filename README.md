@@ -42,4 +42,6 @@ the test activity called Point Cloud - see http://depts.washington.edu/acelab/pr
 
  * Show "cheat sheet" as gesture input background.
 
+10. Slight enlargement of the size of the alphabet gesture area at the expense of the number gesture area.
+
 <img alt="gesture" src="./docs/images/gesture.png" width="400px">
