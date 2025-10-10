@@ -14,6 +14,7 @@ public class SettingsActivity extends Activity implements OnClickListener
   private CheckBox chkFiles = null;
   private CheckBox chkLogcat = null;
   private CheckBox chkResults = null;
+  private CheckBox chkBitmaps = null;
   private Button btnInputSettings = null;
   private Button btnReloadGestures = null;
   private Button btnShowHelp = null;
@@ -36,6 +37,9 @@ public class SettingsActivity extends Activity implements OnClickListener
     chkResults = (CheckBox) findViewById(R.id.checkResults);
     chkResults.setOnClickListener(this);
     chkResults.setChecked(App.isShowResultsEnabled());
+    chkBitmaps = (CheckBox) findViewById(R.id.checkShowBitmaps);
+    chkBitmaps.setOnClickListener(this);
+    chkBitmaps.setChecked(App.isBitmapsEnabled());
     btnShowHelp = (Button) findViewById(R.id.buttonShowHelp);
     btnShowHelp.setOnClickListener(this);
   }
@@ -82,6 +86,12 @@ public class SettingsActivity extends Activity implements OnClickListener
     {
       App.setShowResults(chkResults.isChecked());
       App.showToast("Results to be shown: " + chkResults.isChecked());
+    }
+    
+    if(v == chkBitmaps)
+    {
+      App.setBitmapsEnabled(chkBitmaps.isChecked());
+      App.showToast("Using bitmaps as gesture backgrounds: " + chkBitmaps.isChecked());
     }
   }
 }

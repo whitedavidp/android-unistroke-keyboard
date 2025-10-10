@@ -1,11 +1,14 @@
 package com.whitedavidp.unistroke_keyboard;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.gesture.Gesture;
 import android.gesture.GestureOverlayView;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
 import android.inputmethodservice.InputMethodService;
 import android.os.Build;
 import android.os.SystemClock;
@@ -259,12 +262,52 @@ implements IKeyboardService
             setupButtonKey(view, R.id.keyboard_button_dpad_down);
             setupButtonKey(view, R.id.keyboard_button_forward_del);
         }
+        
+        private void setGestureOverlayBackground(GestureOverlayView overlay, int drawable)
+        {
+          Bitmap bitmap = BitmapFactory.decodeResource(overlay.getResources(), drawable);
+          overlay.setBackground(new BitmapDrawable(overlay.getResources(), bitmap));
+        }
+        
+        private void clearGestureOverlayBackground(GestureOverlayView overlay)
+        {
+          overlay.setBackground(null);
+          overlay.setBackgroundColor(Color.parseColor("#222222"));
+        }
+        
+        public void showBackground()
+        {
+          if(null != mainView)
+          {
+            GestureOverlayView overlay = (GestureOverlayView) mainView.findViewById(R.id.gestures_overlay);
+            GestureOverlayView overlay_num = (GestureOverlayView) mainView.findViewById(R.id.gestures_overlay_num);
+            if(App.isBitmapsEnabled())
+            {
+              if(!mViewModel.isSpecialOn())
+              {
+                setGestureOverlayBackground(overlay, R.drawable.alphabet);
+              }
+              else
+              {
+                setGestureOverlayBackground(overlay, R.drawable.special);
+              }
+              
+              setGestureOverlayBackground(overlay_num, R.drawable.number);
+            }
+            else
+            {
+              clearGestureOverlayBackground(overlay);
+              clearGestureOverlayBackground(overlay_num);
+            }
+          }
+        }
 
         private void setupGestureOverlays(View view)
         {
             final GestureOverlayView overlay = (GestureOverlayView) view.findViewById(R.id.gestures_overlay);
             final GestureOverlayView overlayNum = (GestureOverlayView) view.findViewById(R.id.gestures_overlay_num);
-
+            showBackground();
+ 
             overlay.addOnGestureListener(
                 new OnGestureUnistrokeListener(GestureStore.FLAG_CATEGORY_ALPHABET)
                 {
@@ -398,6 +441,7 @@ implements IKeyboardService
             mButtonCtrl.setBackgroundResource(mViewModel.isCtrlOn() ? R.drawable.button_active : R.drawable.button);
             mButtonAlt.setBackgroundResource(mViewModel.isAltOn() ? R.drawable.button_active : R.drawable.button);
             mInfoView.setText(mViewModel.isSpecialOn() ? "special" : "");
+            getViewController().showBackground();
         }
 
         public void setAlphabetActive()

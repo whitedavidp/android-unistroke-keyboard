@@ -16,9 +16,9 @@ Changes to the original:
 
 2. Removed "cursor mode" entirely as it seemed to get triggered accidentally and caused much more trouble than it was worth.
 
-3. Added double-tap of Key button to show pop-up of the cheat sheet.
+3. Added double-tap of Key button to show pop-up of the "cheat sheet".
 
-4. Some changes to the alphabet gestures - added to "y" and "g" to make them more compatible with their Graffiti analogs. Changed them for "b" and "e" entirely due to frustrating, consistent mis-recognition.
+4. Some changes to the alphabet gestures - added to "y", "g", and "5" to make them more compatible with their Graffiti analogs. Changed them for "b" and "e" entirely due to frustrating, consistent mis-recognition.
 
 5. Removed various items related to notifications and other stuff that made it difficult to build inside of my old, Eclipse environment. NOTE: due to lack of a modern build environment and the use of an older target SDK to avoid file access issues,
 there is no expectation this will build properly without at least some modifications to those configs.
@@ -38,5 +38,7 @@ the test activity called Point Cloud - see http://depts.washington.edu/acelab/pr
 "warn" you. Results of this are shown in the app's logcat (if optionally enabled).
 
  * Show gesture recognition results/scores at the bottom of the input area.
+
+ * Show "cheat sheet" as gesture input background.
 
 <img alt="gesture" src="./docs/images/gesture.png" width="400px">

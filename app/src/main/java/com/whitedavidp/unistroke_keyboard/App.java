@@ -15,6 +15,7 @@ public class App extends Application
   private static final String ENABLE_FILE_LOAD_PREF = "LOAD_FROM_FILES";
   private static final String ENABLE_LOGGING_PREF = "PERFORM_LOGGING";
   private static final String ENABLE_SHOW_RESULTS_PREF = "SHOW_RESULTS";
+  private static final String ENABLE_SHOW_BITMAPS_PREF = "SHOW_BITMAPS";
   protected static String TAG = "_App";
   private static Context context = null;
   private static ApplicationResources resources = null;
@@ -54,6 +55,24 @@ public class App extends Application
     Editor e = getPrefs().edit();
     e.putBoolean(ENABLE_LOGGING_PREF, isEnabled);
     e.commit();
+  }
+  
+  static boolean isBitmapsEnabled()
+  {
+   return getPrefs().getBoolean(ENABLE_SHOW_BITMAPS_PREF, false);
+  }
+  
+  static void setBitmapsEnabled(boolean isEnabled)
+  {
+    Editor e = getPrefs().edit();
+    e.putBoolean(ENABLE_SHOW_BITMAPS_PREF, isEnabled);
+    e.commit();
+    
+    // the view controller may not yet have been created
+    if(GestureInputMethod.getViewController() != null)
+    {
+      GestureInputMethod.getViewController().showBackground();
+    }
   }
 
   static boolean isLoadFromFilesEnabled()
@@ -124,6 +143,5 @@ public class App extends Application
     Intent intent = new Intent(context, HelpActivity.class);
     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     context.startActivity(intent);
-
   }
 }
