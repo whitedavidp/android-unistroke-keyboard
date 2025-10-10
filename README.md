@@ -3,6 +3,7 @@
 Unistroke Handwriting Input Method for Programming
 
 <img alt="screenshot" src="./docs/images/screenshot.png" width="400px">
+<img alt="screenshot" src="./docs/images/screenshot2.png" width="400px">
 
 * Left pane for alphabet.
 * Right pane for number.
