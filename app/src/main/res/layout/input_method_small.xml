@@ -76,7 +76,7 @@
                     android:gestureStrokeType="single"
                     android:fadeEnabled="false"
                     android:background="#222222"
-                    android:layout_weight="4.0"
+                    android:layout_weight="5.0"
                     android:layout_margin="@dimen/layout_margin">
 
                     <TextView
@@ -84,7 +84,8 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:textColor="#C6C6C6"
-                        android:background="@color/colorPrimaryDark"/>
+                        android:background="@color/colorPrimaryDark"
+                        android:layout_gravity="bottom|right"/>
 
                 </android.gesture.GestureOverlayView>
 
@@ -104,7 +105,8 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:textColor="#C6C6C6"
-                        android:background="@color/colorPrimaryDark"/>
+                        android:background="@color/colorPrimaryDark"
+                        android:layout_gravity="bottom|right"/>
 
                 </android.gesture.GestureOverlayView>
 

@@ -1,6 +1,8 @@
 # android-unistroke-keyboard
 
-Unistroke Handwriting Input Method for Programming
+Unistroke Gestural Input Method for General Purpose and Command Line Use.
+
+This provides an alternative to the Graffiti Pro app - which appears to no longer be maintained - and provides extensions useful for command line activities.
 
 <img alt="screenshot" src="./docs/images/screenshot.png" width="400px">
 <img alt="screenshot" src="./docs/images/screenshot2.png" width="400px">
@@ -11,7 +13,9 @@ Unistroke Handwriting Input Method for Programming
 * KEY button shows some useful key buttons.
 * Long press enters cursor mode. REMOVED
 
-Changes to the original:
+Please note that the lion's share of the work here comes from the repo/author from which this has been forked. It is NOT intended to be a source of pull requests for the original.
+
+Changes from the original:
 
 1. Made input area taller for use with higher resolution screens (greater than 1920px in height) by increasing button height dimension from 36 to 60.
 
@@ -40,8 +44,12 @@ the test activity called Point Cloud - see http://depts.washington.edu/acelab/pr
 
  * Show gesture recognition results/scores at the bottom of the input area.
 
- * Show "cheat sheet" as gesture input background.
+ * Show "cheat sheet" excepts as gesture input backgrounds.
 
 10. Slight enlargement of the size of the alphabet gesture area at the expense of the number gesture area.
+
+11. Added icon to replace the default one. Hopefully better but I am no artist :-(
+
+12. Changed position of "special" indicators from top/left to bottom/right as they seem more visible and do not obscure the "cheat sheet" backgrounds (when enabled).
 
 <img alt="gesture" src="./docs/images/gesture.png" width="400px">

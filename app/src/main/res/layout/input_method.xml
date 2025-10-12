@@ -85,7 +85,7 @@
                         android:layout_width="wrap_content"
                         android:textColor="#C6C6C6"
                         android:background="@color/colorPrimaryDark"
-                    />
+                        android:layout_gravity="bottom|right"/>
 
                 </android.gesture.GestureOverlayView>
 
@@ -105,7 +105,8 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:textColor="#C6C6C6"
-                        android:background="@color/colorPrimaryDark"/>
+                        android:background="@color/colorPrimaryDark"
+                        android:layout_gravity="bottom|right"/>
 
                 </android.gesture.GestureOverlayView>
 
