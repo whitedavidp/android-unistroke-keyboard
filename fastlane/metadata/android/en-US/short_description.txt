@@ -1,1 +1,1 @@
-Unistroke Handwriting Input Method for Programming
+Unistroke Gestural Input Method for General Purpose and Command Line Use.
