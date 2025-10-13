@@ -44,7 +44,24 @@ class GestureStore
 
         if(App.isShowResultsEnabled())
         {
-          App.displayResults("Recognition result: " + ((null == prediction.name) ? "unrecognized" : prediction.name) + " / " + prediction.score);
+          String name = null;
+          if(prediction.equals(PredictionResult.Zero))
+          {
+            name = App.getAppContext().getString(R.string.unrecognized);
+          }
+          else
+          {
+            if(prediction.score < 1.5)
+            {
+              name = App.getAppContext().getString(R.string.poor_result) + prediction.name;
+            }
+            else
+            {
+              name = prediction.name;
+            }
+          }
+
+          App.displayResults(App.getAppContext().getString(R.string.recognition) + name + " / " + prediction.score);
         }
         
         return prediction;

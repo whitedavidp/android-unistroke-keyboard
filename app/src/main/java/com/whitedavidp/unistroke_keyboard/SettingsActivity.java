@@ -2,15 +2,20 @@ package com.whitedavidp.unistroke_keyboard;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 public class SettingsActivity extends Activity implements OnClickListener
 {
+  private TextView txtAppInfo = null;
   private CheckBox chkFiles = null;
   private CheckBox chkLogcat = null;
   private CheckBox chkResults = null;
@@ -24,6 +29,7 @@ public class SettingsActivity extends Activity implements OnClickListener
   {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_settings);
+    setAppInfo();
     btnInputSettings = (Button) findViewById(R.id.buttonInputSettings);
     btnInputSettings.setOnClickListener(this);
     chkFiles = (CheckBox) findViewById(R.id.checkFiles);
@@ -44,6 +50,33 @@ public class SettingsActivity extends Activity implements OnClickListener
     btnShowHelp.setOnClickListener(this);
   }
   
+  private String assembleAppInfo()
+  {
+    PackageManager manager = getPackageManager();
+    StringBuilder sb = new StringBuilder();
+    
+    try
+    {
+      PackageInfo info = manager.getPackageInfo(getPackageName(), 0);
+      sb.append(String.format(getString(R.string.about_version_name), info.versionName, "\n"));
+      sb.append(String.format(getString(R.string.about_version_number), info.versionCode, "\n"));
+    }
+    catch(NameNotFoundException e)
+    {
+      App.Log("Settings", e.getLocalizedMessage());
+    }
+
+    return sb.toString();
+  }
+  
+  private void setAppInfo()
+  {
+    txtAppInfo = (TextView) findViewById(R.id.textAppInfo); 
+    StringBuilder sb = new StringBuilder(getString(R.string.app_name)+ " " + getString(R.string.app_url) + "\n");
+    sb.append(assembleAppInfo());
+    txtAppInfo.setText(sb.toString());
+  }
+
   @Override
   public void onBackPressed()
   {
@@ -57,13 +90,13 @@ public class SettingsActivity extends Activity implements OnClickListener
     if(v == chkFiles)
     {
       App.setLoadFromFiles(chkFiles.isChecked());
-      App.showToast("Files to be checked: " + chkFiles.isChecked()); 
+      App.showToast(getString(R.string.checking_files) + chkFiles.isChecked()); 
     }
     
     if(v == chkLogcat)
     {
       App.setLoggingEnabled(chkLogcat.isChecked());
-      App.showToast("Logging: " + chkLogcat.isChecked());
+      App.showToast(getString(R.string.logging) + chkLogcat.isChecked());
     } 
     
     if(v == btnInputSettings)
@@ -74,7 +107,7 @@ public class SettingsActivity extends Activity implements OnClickListener
     if(v == btnReloadGestures)
     {
       App.reloadGestures();
-      App.showToast("Gestures have been reloaded");
+      App.showToast(getString(R.string.gestures_reloaded));
     }
   
     if(v == btnShowHelp)
@@ -85,13 +118,13 @@ public class SettingsActivity extends Activity implements OnClickListener
     if(v == chkResults)
     {
       App.setShowResults(chkResults.isChecked());
-      App.showToast("Results to be shown: " + chkResults.isChecked());
+      App.showToast(getString(R.string.showing_results) + chkResults.isChecked());
     }
     
     if(v == chkBitmaps)
     {
       App.setBitmapsEnabled(chkBitmaps.isChecked());
-      App.showToast("Using bitmaps as gesture backgrounds: " + chkBitmaps.isChecked());
+      App.showToast(getString(R.string.showing_bitmaps) + chkBitmaps.isChecked());
     }
   }
 }

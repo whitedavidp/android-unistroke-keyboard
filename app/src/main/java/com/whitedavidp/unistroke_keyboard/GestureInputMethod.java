@@ -513,8 +513,9 @@ implements IKeyboardService
             {
                 Gesture gesture = overlay.getGesture();
                 PredictionResult prediction = App.getApplicationResources().gestures.recognize(gesture, makeFlags());
-                if (prediction.score == 0)
-                //if (prediction.score < 1.5)
+                
+                // generally speaking, a recognition score of less than 1.5 is considered a poor match. so vibrate and ignore the gesture
+                if (prediction.score < 1.5)
                 {
                     vibrate(true);
                     return;

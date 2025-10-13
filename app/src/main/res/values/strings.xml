@@ -15,5 +15,16 @@
     <string name="reload_gestures">Force Reload of Gestures</string>
     <string name="credit">Please note that the lion\'s share of the credit for this app must go to its original developer. His project/code is located here: https://github.com/tmatz/android-unistroke-keyboard</string>
     <string name="enable_bitmaps">Use cheat sheet images as gesture backgrounds</string>
+    <string name="checking_files">"Files to be checked:&#160;</string>
+    <string name="logging">Logging:&#160;</string>
+    <string name="gestures_reloaded">Gestures have been reloaded</string>
+    <string name="showing_results">Results to be shown:&#160;</string>
+    <string name="showing_bitmaps">Using bitmaps as gesture backgrounds:&#160;</string>
+    <string name="unrecognized">unrecognized</string>
+    <string name="poor_result">poor result for&#160;</string>
+    <string name="recognition">Recognition:&#160;</string>
+    <string name="about_version_name">Version Name: %1$s%2$S</string>
+    <string name="about_version_number">Version Number: %1$s%2$s</string>
+  	<string name="app_url">https://github.com/whitedavidp/android-unistroke-keyboard</string>
 
 </resources>
