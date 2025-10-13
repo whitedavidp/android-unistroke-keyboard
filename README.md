@@ -40,8 +40,8 @@ the test activity called Point Cloud - see http://depts.washington.edu/acelab/pr
 
  * Log some information to the system logcat. You will need to use ADB or a logcat app to view this information.
 
- * Allow the app to read gestures from files of the appropriate names stored in the root of internal storage. This makes experimenting with gestures easier as no recompiling it required. However, it does require lowering the target SDK. So Android may
-"warn" you. Results of this are shown in the app's logcat (if optionally enabled).
+ * Allow the app to read gestures from files of the appropriate names stored in the root of internal storage. This makes experimenting with gestures easier as no recompiling it required. However, it does require lowering the target SDK and addition of
+the WRITE_EXTERNAL_STORAGE permission. So Android may "warn" you. Results of this are shown in the app's logcat (if optionally enabled).
 
  * Show gesture recognition results/scores at the bottom of the input area.
 
