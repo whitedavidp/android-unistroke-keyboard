@@ -13,8 +13,7 @@ This provides an alternative to the Graffiti Pro app - which appears to no longe
 * KEY button shows some useful key buttons.
 * Long press enters cursor mode. REMOVED
 
-# Please note that for reasons unclear, Microsoft Defender is marking the apk as malware. It is NOT and this is a false-positive. Scanning using multiple products at www.virustotal.com demonstrates that only Defender thinks this is the case. I apologize
-for and have tried, without success, to report the problem to Microsoft. There is nothing more I can do at this time.
+# Please note that for reasons unclear, Microsoft Defender is marking the apk as malware. It is NOT and this is a false-positive. Scanning using multiple products at www.virustotal.com demonstrates that only Defender thinks this is the case. I apologize for and have tried, without success, to report the problem to Microsoft. There is nothing more I can do at this time.
 
 Please note that the lion's share of the work here comes from the repo/author from which this has been forked. It is NOT intended to be a source of pull requests for the original.
 
