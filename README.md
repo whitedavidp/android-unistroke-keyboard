@@ -13,6 +13,9 @@ This provides an alternative to the Graffiti Pro app - which appears to no longe
 * KEY button shows some useful key buttons.
 * Long press enters cursor mode. REMOVED
 
+# Please note that for reasons unclear, Microsoft Defender is marking the apk as malware. It is NOT and this is a false-positive. Scanning using multiple products at www.virustotal.com demonstrates that only Defender thinks this is the case. I apologize
+for and have tried, without success, to report the problem to Microsoft. There is nothing more I can do at this time.
+
 Please note that the lion's share of the work here comes from the repo/author from which this has been forked. It is NOT intended to be a source of pull requests for the original.
 
 Also note: Due to my lack of a modern build environment and the use of an older target SDK to avoid file access issues, there is no expectation this will build properly in a "modern" build environment without at least some modifications to those configs.
@@ -29,8 +32,8 @@ Changes from the original:
 
 5. Removed various items related to notifications and other stuff that made it difficult to build inside of my old, Eclipse environment.
 
-6. Included the Gesture Builder apk since that is used to modify the raw resources in this app. (Note: this build of Gesture Builder is my own and differs from the one included in the SDK. It has a test activity and it is using a 3rd party recognizer in
-the test activity called Point Cloud - see http://depts.washington.edu/acelab/proj/dollar/pdollar.html for details - so the quality of reported recognition may not match that of the keyboard code.)
+6. Included the Gesture Builder apk since that is used to modify the raw resources in this app. (Note: this build of Gesture Builder is my own and differs slightly from the one included in the SDK. It has a test activity and the match prediction it displays
+should match that of the keyboard code).
 
 7. Added Graffiti Return/Enter stroke.
 
@@ -41,11 +44,11 @@ the test activity called Point Cloud - see http://depts.washington.edu/acelab/pr
  * Log some information to the system logcat. You will need to use ADB or a logcat app to view this information.
 
  * Allow the app to read gestures from files of the appropriate names stored in the root of internal storage. This makes experimenting with gestures easier as no recompiling it required. However, it does require lowering the target SDK and addition of
-the WRITE_EXTERNAL_STORAGE permission. So Android may "warn" you. Results of this are shown in the app's logcat (if optionally enabled).
+the READ_EXTERNAL_STORAGE permission. So Android may "warn" you. Results of this are shown in the app's logcat (if optionally enabled).
 
  * Show gesture recognition results/scores at the bottom of the input area.
 
- * Show "cheat sheet" excepts as gesture input backgrounds.
+ * Show "cheat sheet" excerpts as gesture input backgrounds.
 
 10. Slight enlargement of the size of the alphabet gesture area at the expense of the number gesture area.
 
