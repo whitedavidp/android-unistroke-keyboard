@@ -51,7 +51,7 @@ class GestureStore
           }
           else
           {
-            if(prediction.score < 1.5)
+            if(prediction.score < App.getMinimumRecognitionScore())
             {
               name = App.getAppContext().getString(R.string.poor_result) + prediction.name;
             }
@@ -187,7 +187,7 @@ class GestureStore
                 return first;
             }
 
-            if (first.score < 1.5)
+            if (first.score < App.getMinimumRecognitionScore())
             {
                 return PredictionResult.Zero;
             }

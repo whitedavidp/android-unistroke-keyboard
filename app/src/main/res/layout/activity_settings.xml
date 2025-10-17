@@ -1,123 +1,172 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent" 
     android:orientation="vertical"
    
-    tools:context="com.whitedavidp.unistroke_keyboard.SettingsActivity" >
-    
-    <TextView
-        android:id="@+id/textAppInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:textStyle="bold"
-        android:autoLink="web"
-    />
-       
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/open_settings_instructions"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:textStyle="bold"
-    />
-    
-    <Button android:id="@+id/buttonInputSettings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/open_settings_button"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center_horizontal"
-    />
-    
-    <CheckBox android:id="@+id/checkFiles"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/load_from_files"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-    />
+    tools:context="com.whitedavidp.unistroke_keyboard.SettingsActivity" > 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/reload_gestures_instructions"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:textStyle="bold"
-    />
-    
-    <Button android:id="@+id/buttonReloadGestures"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/reload_gestures"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center_horizontal"
-    />
-    
-    <CheckBox android:id="@+id/checkLogging"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/enable_logcat"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-    />
-    
-    <CheckBox android:id="@+id/checkResults"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/enable_results"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-    />
-    
-    <CheckBox android:id="@+id/checkShowBitmaps"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/enable_bitmaps"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-    />
-    
-    <Button android:id="@+id/buttonShowHelp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/show_help"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center_horizontal"
-    />
-    
-    <TextView
-        android:layout_weight="1" 
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-	/>
-        
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/credit"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:textStyle="bold"
-        android:autoLink="web"
-    />
-    
-</LinearLayout>
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
+	    
+	    <TextView
+	        android:id="@+id/textAppInfo"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginRight="20dp"
+	        android:layout_marginTop="10dp"
+	        android:textStyle="bold"
+	        android:autoLink="web" />
+	    
+	    <Button android:id="@+id/buttonShowHelp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/show_help"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginRight="20dp"
+	        android:layout_marginTop="10dp"
+	        android:layout_gravity="center_horizontal"
+	        android:paddingRight="10dp"
+	        android:paddingLeft="10dp"
+	        android:background="@color/colorPrimary" />
+	    
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/open_settings_instructions"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginRight="20dp"
+	        android:layout_marginTop="10dp"
+	        android:textStyle="bold" />
+	    
+	    <Button android:id="@+id/buttonInputSettings"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/open_settings_button"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginRight="20dp"
+	        android:layout_marginTop="10dp"
+	        android:layout_gravity="center_horizontal"
+	        android:paddingRight="10dp"
+	        android:paddingLeft="10dp"
+	        android:background="@color/colorPrimary" />
+	    
+	    <CheckBox android:id="@+id/checkFiles"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/load_from_files"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginRight="20dp"
+	        android:layout_marginTop="10dp" />
+	
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/reload_gestures_instructions"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginRight="20dp"
+	        android:layout_marginTop="10dp"
+	        android:textStyle="bold" />
+	    
+	    <Button android:id="@+id/buttonReloadGestures"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/reload_gestures"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginRight="20dp"
+	        android:layout_marginTop="10dp"
+	        android:layout_gravity="center_horizontal"
+	        android:paddingRight="10dp"
+	        android:paddingLeft="10dp"
+	        android:background="@color/colorPrimary" />
+	
+	    <LinearLayout
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal"
+	        android:layout_marginRight="20dp"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginTop="10dp" 
+	        android:focusableInTouchMode="true"
+	        android:focusable="true" >
+		
+	       <TextView 
+	           android:layout_width="wrap_content"
+	           android:layout_height="wrap_content"
+	           android:text="@string/minimum_recognition_score"
+	           android:textStyle="bold" />
+	  		
+	  		<EditText 
+	  		    android:id="@+id/editMinimumRecognition"
+	           	android:layout_width="0dp"
+	           	android:layout_height="wrap_content"
+	  		    android:textStyle="bold"
+	  		    android:inputType="numberSigned|numberDecimal"
+	  		    android:text="@string/default_recognition_score"
+	  		    android:layout_weight="1" />
+	    </LinearLayout>
+	
+	    <LinearLayout
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal"
+	        android:layout_marginRight="20dp"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginTop="10dp" >
+		    
+		    <CheckBox android:id="@+id/checkLogging"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/enable_logcat" />
+		    
+		    <CheckBox android:id="@+id/checkResults"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/enable_results" />
+	    </LinearLayout>
+	    
+	    <CheckBox android:id="@+id/checkShowBitmaps"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/enable_bitmaps"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginRight="20dp"
+	        android:layout_marginTop="10dp" />
+	    
+	    <CheckBox android:id="@+id/checkVibrateOnSpecial"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/vibrate_on_special"
+	        android:layout_marginRight="20dp"
+	       	android:layout_marginLeft="20dp"
+	       	android:layout_marginTop="10dp" />
+	    
+	    <CheckBox android:id="@+id/checkLongVibrateOnError"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/long_vibrate_on_error"
+	        android:layout_marginRight="20dp"
+	       	android:layout_marginLeft="20dp"
+	       	android:layout_marginTop="10dp" /> 
+	       	
+	    <TextView
+	        android:layout_weight="1" 
+	        android:layout_width="wrap_content"
+	        android:layout_height="0dp"	/>    
+	    
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/credit"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginRight="20dp"
+	        android:layout_marginTop="10dp"
+	        android:textStyle="bold"
+	        android:autoLink="web" />
+	    
+	</LinearLayout>
+</ScrollView>

@@ -70,7 +70,7 @@ implements OnTouchListener
         public void run()
         {
             onKeyRepeat(keyCode);
-            mView.postDelayed(this, ApplicationResources.KEYREPEAT_DELAY_MS);
+            mView.postDelayed(this, App.KEYREPEAT_DELAY_MS);
         }
 
         public boolean onTouchEvent(View view, MotionEvent e)
@@ -151,7 +151,7 @@ implements OnTouchListener
             onKeyDown(keyCode);
             if (!KeyEvent.isModifierKey(keyCode))
             {
-                mView.postDelayed(this, ApplicationResources.KEYREPEAT_DELAY_MS);
+                mView.postDelayed(this, App.KEYREPEAT_DELAY_MS);
             }
         }
 

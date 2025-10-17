@@ -7,8 +7,8 @@
     <string name="open_settings_instructions">Press the button below to make sure that this input method is enabled.</string>
     <string name="open_settings_button">Open system input settings</string>
     <string name="load_from_files">Load gestures from internal storage (if available)</string>
-    <string name="enable_logcat">Enable logcat output</string>
-    <string name="enable_results">Enable display of prediction results</string>
+    <string name="enable_logcat">Use logcat output</string>
+    <string name="enable_results">Display prediction results</string>
     <string name="show_help">Show Default Gesture Strokes</string>
     <string name="scroll_and_zoom">Default Gesture Strokes (scrolls and pinch to zoom)</string>
     <string name="reload_gestures_instructions">Press the button below to make sure that changes to gesture files or sources are appplied. Force stop of the app will also work.</string>
@@ -26,5 +26,9 @@
     <string name="about_version_name">Version Name: %1$s%2$S</string>
     <string name="about_version_number">Version Number: %1$s%2$s</string>
   	<string name="app_url">https://github.com/whitedavidp/android-unistroke-keyboard</string>
-
+  	<string name="long_vibrate_on_error">Extended vibrate on unrecognized gesture</string>
+  	<string name="vibrate_on_special">Vibrate when entering "special"</string>
+  	<string name="minimum_recognition_score">Min. gesture recognition score (usual=1.5):&#160;</string>
+	<string name="default_recognition_score">1.50</string>
+	<string name="crazy_minimum_value">Min. score change ignored - the value entered must be between .5 and 3.0</string>
 </resources>

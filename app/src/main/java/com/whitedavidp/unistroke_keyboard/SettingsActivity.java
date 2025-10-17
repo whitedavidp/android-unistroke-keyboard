@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class SettingsActivity extends Activity implements OnClickListener
@@ -20,10 +21,13 @@ public class SettingsActivity extends Activity implements OnClickListener
   private CheckBox chkLogcat = null;
   private CheckBox chkResults = null;
   private CheckBox chkBitmaps = null;
+  private CheckBox chkVibrateOnSpecial = null;
+  private CheckBox chkLongVibrateOnError = null;
   private Button btnInputSettings = null;
   private Button btnReloadGestures = null;
   private Button btnShowHelp = null;
-  
+  private EditText editMinimumRecognition = null;
+
   @Override
   protected void onCreate(Bundle savedInstanceState)
   {
@@ -48,13 +52,28 @@ public class SettingsActivity extends Activity implements OnClickListener
     chkBitmaps.setChecked(App.isBitmapsEnabled());
     btnShowHelp = (Button) findViewById(R.id.buttonShowHelp);
     btnShowHelp.setOnClickListener(this);
+    chkVibrateOnSpecial = (CheckBox) findViewById(R.id.checkVibrateOnSpecial);
+    chkVibrateOnSpecial.setOnClickListener(this);
+    chkVibrateOnSpecial.setChecked(App.isVibrateOnSpecialEnabled());
+    chkLongVibrateOnError = (CheckBox) findViewById(R.id.checkLongVibrateOnError);
+    chkLongVibrateOnError.setOnClickListener(this);
+    chkLongVibrateOnError.setChecked(App.isLongVibrateOnErrorEnabled());
+    editMinimumRecognition = (EditText) findViewById(R.id.editMinimumRecognition);
+    editMinimumRecognition.setText(Float.toString(App.getMinimumRecognitionScore()));
   }
-  
+
+  @Override
+  protected void onDestroy()
+  {
+    setMinimumRecognition();
+    super.onDestroy();
+  }
+
   private String assembleAppInfo()
   {
     PackageManager manager = getPackageManager();
     StringBuilder sb = new StringBuilder();
-    
+
     try
     {
       PackageInfo info = manager.getPackageInfo(getPackageName(), 0);
@@ -68,10 +87,10 @@ public class SettingsActivity extends Activity implements OnClickListener
 
     return sb.toString();
   }
-  
+
   private void setAppInfo()
   {
-    txtAppInfo = (TextView) findViewById(R.id.textAppInfo); 
+    txtAppInfo = (TextView) findViewById(R.id.textAppInfo);
     StringBuilder sb = new StringBuilder(getString(R.string.app_name)+ " " + getString(R.string.app_url) + "\n");
     sb.append(assembleAppInfo());
     txtAppInfo.setText(sb.toString());
@@ -90,41 +109,73 @@ public class SettingsActivity extends Activity implements OnClickListener
     if(v == chkFiles)
     {
       App.setLoadFromFiles(chkFiles.isChecked());
-      App.showToast(getString(R.string.checking_files) + chkFiles.isChecked()); 
+      App.showToast(getString(R.string.checking_files) + chkFiles.isChecked());
     }
-    
+
     if(v == chkLogcat)
     {
       App.setLoggingEnabled(chkLogcat.isChecked());
       App.showToast(getString(R.string.logging) + chkLogcat.isChecked());
-    } 
-    
+    }
+
     if(v == btnInputSettings)
     {
       this.startActivity(new Intent(Settings.ACTION_INPUT_METHOD_SETTINGS));
     }
-    
+
     if(v == btnReloadGestures)
     {
       App.reloadGestures();
       App.showToast(getString(R.string.gestures_reloaded));
     }
-  
+
     if(v == btnShowHelp)
     {
       App.showHelp();
     }
-  
+
     if(v == chkResults)
     {
       App.setShowResults(chkResults.isChecked());
       App.showToast(getString(R.string.showing_results) + chkResults.isChecked());
     }
-    
+
     if(v == chkBitmaps)
     {
       App.setBitmapsEnabled(chkBitmaps.isChecked());
       App.showToast(getString(R.string.showing_bitmaps) + chkBitmaps.isChecked());
     }
+
+    if(v == chkVibrateOnSpecial)
+    {
+      App.setVibrateOnSpecialEnabled(chkVibrateOnSpecial.isChecked());
+      App.showToast(getString(R.string.vibrate_on_special) + ": " + chkVibrateOnSpecial.isChecked());
+    }
+
+    if(v == chkLongVibrateOnError)
+    {
+      App.setLongVibrateOnErrorEnabled(chkLongVibrateOnError.isChecked());
+      App.showToast(getString(R.string.long_vibrate_on_error) + ": " + chkLongVibrateOnError.isChecked());
+    }
+  }
+
+  private void setMinimumRecognition()
+  {
+    float newValue = Float.parseFloat(getString(R.string.default_recognition_score));
+
+    String s = editMinimumRecognition.getText().toString();
+    if(null != s)
+    {
+      float f = Float.parseFloat(s);
+      if(f < .5 || f > 3.0)
+      {
+        App.showToast(getString(R.string.crazy_minimum_value));
+        return;
+      }
+
+      newValue = f;
+    }
+
+    App.setMinimumRecognitionScore(newValue);
   }
 }

@@ -49,10 +49,14 @@ the READ_EXTERNAL_STORAGE permission. So Android may "warn" you. Results of this
 
  * Show "cheat sheet" excerpts as gesture input backgrounds.
 
+ * Set minimum gesture recognition score. Recognition below this value is considered an error. Usually, a value of 1.5 is considered a good value and is the default. The accepted range is .5 to 3.0. Use after viewing prediction results, if needed.
+
+ * Perform extended vibrate on unrecognized gesture in order to make you more aware. If disabled, only a short vibration is issued. This also helps distinguish from the optional short vibration used when entering "special" mode.
+
 10. Slight enlargement of the size of the alphabet gesture area at the expense of the number gesture area.
 
 11. Added icon to replace the default one. Hopefully better but I am no artist :-(
 
-12. Changed position of "special" indicators from top/left to bottom/right as they seem more visible and do not obscure the "cheat sheet" backgrounds (when enabled).
+12. Changed position of "special" indicators from top/left to bottom/right as they seem more visible and do not obscure the "cheat sheet" backgrounds (when enabled). Optionally vibrate when entering "special" mode.
 
 <img alt="gesture" src="./docs/images/gesture.png" width="400px">

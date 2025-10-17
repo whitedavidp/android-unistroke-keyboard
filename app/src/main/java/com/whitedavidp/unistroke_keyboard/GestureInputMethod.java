@@ -161,17 +161,6 @@ implements IKeyboardService
         getCurrentInputConnection().sendKeyEvent(event);
     }
 
-    private boolean vibrate(boolean strong)
-    {
-        Vibrator vibrator = (Vibrator)getSystemService(VIBRATOR_SERVICE);
-        if (vibrator == null || !vibrator.hasVibrator())
-        {
-            return false;
-        }
-        vibrator.vibrate(strong ? ApplicationResources.VIBRATION_STRONG_MS : ApplicationResources.VIBRATION_MS);
-        return true;
-    }
-
     private static class KeyEventUtils
     {
         public static int keyCodeFromTag(String tag)
@@ -440,7 +429,7 @@ implements IKeyboardService
 
             mButtonCtrl.setBackgroundResource(mViewModel.isCtrlOn() ? R.drawable.button_active : R.drawable.button);
             mButtonAlt.setBackgroundResource(mViewModel.isAltOn() ? R.drawable.button_active : R.drawable.button);
-            mInfoView.setText(mViewModel.isSpecialOn() ? "special" : "");
+            mInfoView.setText(mViewModel.isSpecialOn() ? "special" : "");           
             getViewController().showBackground();
         }
 
@@ -474,7 +463,10 @@ implements IKeyboardService
 
             public void setText(String text)
             {
-                mInfoView.mInfoCurrent.setText(text);
+              // sometimes, I don't see the "special" indicator if it is on only 1 side. so I am putting it on both
+              //mInfoView.mInfoCurrent.setText(text);
+              mInfoNum.setText(text);
+              mInfo.setText(text);
             }
 
             public void setAlphabetActive()
@@ -514,10 +506,10 @@ implements IKeyboardService
                 Gesture gesture = overlay.getGesture();
                 PredictionResult prediction = App.getApplicationResources().gestures.recognize(gesture, makeFlags());
                 
-                // generally speaking, a recognition score of less than 1.5 is considered a poor match. so vibrate and ignore the gesture
-                if (prediction.score < 1.5)
+                // if a poor match vibrate and ignore the gesture
+                if (prediction.score < App.getMinimumRecognitionScore())
                 {
-                    vibrate(true);
+                    App.vibrate(true);
                     return;
                 }
 

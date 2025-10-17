@@ -303,6 +303,12 @@ class KeyboardViewModel
                 else
                 {
                     mSpecialOn = true;
+                    
+                    // use non-error vibrate along with flashing the signal visually
+                    if(App.isVibrateOnSpecialEnabled())
+                    {
+                      App.vibrate(false);
+                    }
                 }
             }
         }
