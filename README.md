@@ -34,7 +34,7 @@ Changes from the original:
 6. Included the Gesture Builder apk since that is used to modify the raw resources in this app. (Note: this build of Gesture Builder is my own and differs slightly from the one included in the SDK. It has a test activity and the match prediction it displays
 should match that of the keyboard code).
 
-7. Added Graffiti Return/Enter stroke.
+7. Added Graffiti Return/Enter stroke to the common gesture list.
 
 8. Changed package id to avoid collisions as suggested here: https://github.com/tmatz/android-unistroke-keyboard/issues/28#issuecomment-3368561049
 
@@ -58,5 +58,10 @@ the READ_EXTERNAL_STORAGE permission. So Android may "warn" you. Results of this
 11. Added icon to replace the default one. Hopefully better but I am no artist :-(
 
 12. Changed position of "special" indicators from top/left to bottom/right as they seem more visible and do not obscure the "cheat sheet" backgrounds (when enabled). Optionally vibrate when entering "special" mode.
+
+13. Added support for the Graffiti Menu gesture to the common gesture list.
+
+14. Added pseudo-support for the Graffiti Shortcut gesture to the special gesture list. As this is a unistroke recognizer, I cannot implement the full Graffiti behavior as these require multi-strokes. As near as I could come was to optionally launch a
+settings-specified app upon recognition of the shortcut gesture. This could be a dictionary app, for example. I personally use clipboard text expansion app which is fairly close to the original Graffiti shortcut function.
 
 <img alt="gesture" src="./docs/images/gesture.png" width="400px">

@@ -26,6 +26,7 @@ public class SettingsActivity extends Activity implements OnClickListener
   private Button btnInputSettings = null;
   private Button btnReloadGestures = null;
   private Button btnShowHelp = null;
+  private Button btnSetShortcutApp = null;
   private EditText editMinimumRecognition = null;
 
   @Override
@@ -60,6 +61,8 @@ public class SettingsActivity extends Activity implements OnClickListener
     chkLongVibrateOnError.setChecked(App.isLongVibrateOnErrorEnabled());
     editMinimumRecognition = (EditText) findViewById(R.id.editMinimumRecognition);
     editMinimumRecognition.setText(Float.toString(App.getMinimumRecognitionScore()));
+    btnSetShortcutApp = (Button) findViewById(R.id.buttonSetShortcutApp);
+    btnSetShortcutApp.setOnClickListener(this);
   }
 
   @Override
@@ -123,6 +126,13 @@ public class SettingsActivity extends Activity implements OnClickListener
       this.startActivity(new Intent(Settings.ACTION_INPUT_METHOD_SETTINGS));
     }
 
+    if(v == btnSetShortcutApp)
+    {
+      Intent intent = new Intent(this, SelectShortcutAppActivity.class);
+      intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+      startActivity(intent);
+    }
+      
     if(v == btnReloadGestures)
     {
       App.reloadGestures();

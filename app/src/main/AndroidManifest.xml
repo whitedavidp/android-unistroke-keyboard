@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.whitedavidp.unistroke_keyboard"
-    android:versionCode="6"
-    android:versionName="1.0.5" >
+    android:versionCode="9"
+    android:versionName="1.0.8" >
 
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
         <uses-sdk
         android:minSdkVersion="4"
@@ -38,6 +38,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".SelectShortcutAppActivity"
+            android:excludeFromRecents="true"
+            android:theme="@android:style/Theme.Dialog"
+            android:label="@string/choose_app">
         </activity>
         <activity
             android:name=".HelpActivity"

@@ -26,6 +26,7 @@ public class GestureInputMethod
 extends InputMethodService
 implements IKeyboardService
 {
+    private static final String SHORTCUT_GESTURE = "shortcut";
     private static ViewController mViewController = null;
     private final KeyboardViewModel mViewModel = new KeyboardViewModel(this);
 
@@ -512,7 +513,17 @@ implements IKeyboardService
                     App.vibrate(true);
                     return;
                 }
-
+                
+                // if the user entered the shortcut gesture, start the app (if any defined in the prefs)
+                if(prediction.name.toLowerCase().equals(GestureInputMethod.SHORTCUT_GESTURE))
+                {
+                  App.startShortcutApp();
+                  
+                  // do the following to turn special mode off
+                  mViewModel.sendText("");
+                  return;
+                }
+                
                 int keyCode = KeyEventUtils.keyCodeFromTag(prediction.name);
                 if (keyCode == KeyEvent.KEYCODE_UNKNOWN)
                 {

@@ -31,4 +31,12 @@
   	<string name="minimum_recognition_score">Min. gesture recognition score (usual=1.5):&#160;</string>
 	<string name="default_recognition_score">1.50</string>
 	<string name="crazy_minimum_value">Min. score change ignored - the value entered must be between .5 and 3.0</string>
+	<string name="choose_app">Choose Application For Shortcut Gesture</string>
+	<string name="ok">OK</string>
+	<string name="cancel">Cancel</string>
+	<string name="includeSystemApps">Include System Applications</string>
+	<string name="clear_app">None</string>
+	<string name="shortcut_app_missing">The configured shortcut app is missing or cannot be launched</string>
+	<string name="current_app">Current shortcut app:&#160;</string>
+	<string name="no_changes">No changes applied</string>
 </resources>

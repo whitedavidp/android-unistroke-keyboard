@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.PackageManager;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ public class App extends Application
   private static final String ENABLE_VIBRATE_ON_SPECIAL_PREF = "VIBRATE_ON_SPECIAL";
   private static final String ENABLE_LONG_VIBRATE_ON_ERROR_PREF = "LONG_VIBRATE_ON_ERROR";
   private static final String MINIMUM_RECOGNITION_SCORE_PREF = "MINIMUM_RECOGNITION_SCORE";
+  private static final String SHORTCUT_APP_PREF = "SHORTCUT_APP";
   protected static String TAG = "_App";
   private static Context context = null;
   private static ApplicationResources resources = null;
@@ -224,5 +226,44 @@ public class App extends Application
     Editor e = getPrefs().edit();
     e.putFloat(MINIMUM_RECOGNITION_SCORE_PREF, score);
     e.commit();   
+  }
+  
+  public static String getShortcutApp()
+  {
+    return getPrefs().getString(SHORTCUT_APP_PREF, null); 
+  }
+  
+  public static void setShortcutApp(String appPackageName)
+  {
+    Editor e = getPrefs().edit();
+    if(null == appPackageName)
+    {
+      e.remove(SHORTCUT_APP_PREF);
+    }
+    else
+    {
+      e.putString(SHORTCUT_APP_PREF, appPackageName);
+    }
+    
+    e.commit();   
+  }
+  
+  public static void startShortcutApp()
+  {
+    PackageManager pm = context.getPackageManager();
+    String appPackage = getShortcutApp();
+    if(null != appPackage)
+    {
+      Intent launchIntent = pm.getLaunchIntentForPackage(appPackage);
+
+      if (launchIntent != null)
+      {
+        context.startActivity(launchIntent);
+      }
+      else 
+      {
+        showToast(context.getString(R.string.shortcut_app_missing));
+      }
+    }
   }
 }
