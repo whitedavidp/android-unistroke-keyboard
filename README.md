@@ -49,7 +49,8 @@ the READ_EXTERNAL_STORAGE permission. So Android may "warn" you. Results of this
 
  * Show "cheat sheet" excerpts as gesture input backgrounds.
 
- * Set minimum gesture recognition score. Recognition below this value is considered an error. Usually, a value of 1.5 is considered a good value and is the default. The accepted range is .5 to 3.0. Use after viewing prediction results, if needed.
+ * Set minimum gesture recognition score. Recognition below this value is considered an error. Usually, a value of 1.5 is considered a good value and is the default. The accepted range is .5 to 3.0. Use after viewing prediction results, if needed. I
+personally prefer and error to a mis-recognition so I am currently setting this in the 1.8-2.0 range.
 
  * Perform extended vibrate on unrecognized gesture in order to make you more aware. If disabled, only a short vibration is issued. This also helps distinguish from the optional short vibration used when entering "special" mode.
 
