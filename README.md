@@ -63,6 +63,6 @@ personally prefer an error to a mis-recognition so I am currently setting this i
 13. Added support for the Graffiti Menu gesture to the common gesture list.
 
 14. Added pseudo-support for the Graffiti Shortcut gesture to the special gesture list. As this is a unistroke recognizer, I cannot implement the full Graffiti behavior as these require multi-strokes. As near as I could come was to optionally launch a
-settings-specified app upon recognition of the shortcut gesture. This could be a dictionary app, for example. I personally use clipboard text expansion app which is fairly close to the original Graffiti shortcut function.
+settings-specified app upon recognition of the shortcut gesture. This could be a dictionary app, for example. I personally use a clipboard text expansion app which is fairly close to the original Graffiti shortcut function.
 
 <img alt="gesture" src="./docs/images/gesture.png" width="400px">
