@@ -109,7 +109,30 @@
 	  		    android:text="@string/default_recognition_score"
 	  		    android:layout_weight="1" />
 	    </LinearLayout>
-	
+
+	    <LinearLayout
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal"
+	        android:layout_marginRight="20dp"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginTop="10dp" 
+	        android:focusableInTouchMode="true"
+	        android:focusable="true" >
+	    
+		    <TextView 
+		           android:layout_width="wrap_content"
+		           android:layout_height="wrap_content"
+		           android:text="@string/special_mode_tap_duration"
+		           android:textStyle="bold" />
+		    
+		    <Spinner
+		        android:id="@+id/spinSpecialTouchInterval"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content" />
+		    
+	    </LinearLayout>
+
 	    <LinearLayout
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"

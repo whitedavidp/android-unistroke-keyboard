@@ -54,6 +54,8 @@ personally prefer an error to a mis-recognition so I am currently setting this i
 
  * Perform extended vibrate on unrecognized gesture in order to make you more aware. If disabled, only a short vibration is issued. This also helps distinguish from the optional short vibration used when entering "special" mode.
 
+ * Set minimum tap delay length needed to enter special mode. This should help avoid accident shift to this mode by stray touches.
+
 10. Slight enlargement of the size of the alphabet gesture area at the expense of the number gesture area.
 
 11. Added icon to replace the default one. Hopefully better but I am no artist :-(

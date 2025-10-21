@@ -18,6 +18,9 @@ public class App extends Application
   public static final int KEYREPEAT_DELAY_MS = 100;
   public static final int VIBRATION_MS = 15;
   public static final int VIBRATION_STRONG_MS = 30;
+  public static final long SPECIAL_MODE_TAP_DELAY = 125;
+  public static final String[] SPECIAL_MODE_TAP_DURATIONS = { "125", "150", "175", "200", "225", "250", "275" };
+  private static final String SPECIAL_MODE_TAP_DELAY_PREF = "SPECIAL_MODE_TAP_DELAY";
   private static final String ENABLE_FILE_LOAD_PREF = "LOAD_FROM_FILES";
   private static final String ENABLE_LOGGING_PREF = "PERFORM_LOGGING";
   private static final String ENABLE_SHOW_RESULTS_PREF = "SHOW_RESULTS";
@@ -226,6 +229,37 @@ public class App extends Application
     Editor e = getPrefs().edit();
     e.putFloat(MINIMUM_RECOGNITION_SCORE_PREF, score);
     e.commit();   
+  }
+  
+  public static long getSpecialModeTapDelay()
+  {
+    return getPrefs().getLong(SPECIAL_MODE_TAP_DELAY_PREF, SPECIAL_MODE_TAP_DELAY); 
+  }
+  
+  public static void setSpecialModeTapDelay(long delay)
+  {
+    if(!validateSpecialModeTapDelay(delay))
+    {
+      showToast(context.getString(R.string.bad_special_tap_duration));
+      return;
+    }
+    
+    Editor e = getPrefs().edit();
+    e.putLong(SPECIAL_MODE_TAP_DELAY_PREF, delay);
+    e.commit();   
+  }
+  
+  private static boolean validateSpecialModeTapDelay(long delay)
+  {
+    for(int i=0; i < SPECIAL_MODE_TAP_DURATIONS.length; i++)
+    {
+      if(Long.parseLong(SPECIAL_MODE_TAP_DURATIONS[i]) == delay)
+      {
+        return true;
+      }
+    }
+    
+    return false;
   }
   
   public static String getShortcutApp()

@@ -12,7 +12,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.inputmethodservice.InputMethodService;
 import android.os.Build;
 import android.os.SystemClock;
-import android.os.Vibrator;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -69,6 +68,12 @@ implements IKeyboardService
     public void onStartInput(EditorInfo attribute, boolean restarting)
     {
         super.onStartInput(attribute, restarting);
+        
+        // try to clear any past recognition results when starting input again
+        if(null != GestureInputMethod.mViewController)
+        {
+          GestureInputMethod.mViewController.displayResults("");
+        }
     }
 
     @Override
@@ -203,10 +208,13 @@ implements IKeyboardService
         
         public void displayResults(String msg)
         {
-          TextView txtResults = (TextView) mainView.findViewById(R.id.text_results);
-          if(txtResults.getVisibility() == View.VISIBLE)
+          if(null != mainView)
           {
-            txtResults.setText(msg);
+            TextView txtResults = (TextView) mainView.findViewById(R.id.text_results);
+            if((null != txtResults) && (txtResults.getVisibility() == View.VISIBLE))
+            {
+              txtResults.setText(msg);
+            }
           }
         }
         
@@ -495,23 +503,32 @@ implements IKeyboardService
         extends GestureOverlayViewOnGestureListener
         {
             private final int category;
+            private long gestureStartTime = -1;
 
             public OnGestureUnistrokeListener(int category)
             {
                 this.category = category;
             }
+            
+            @Override
+            public void onGestureStarted (GestureOverlayView overlay, MotionEvent e)
+            {
+              gestureStartTime = e.getDownTime();
+            }
 
             @Override
             public void onGestureEnded(GestureOverlayView overlay, MotionEvent e)
             {
+                long gestureDuration = e.getEventTime() - gestureStartTime;
+                gestureStartTime = -1;
                 Gesture gesture = overlay.getGesture();
                 PredictionResult prediction = App.getApplicationResources().gestures.recognize(gesture, makeFlags());
                 
                 // if a poor match vibrate and ignore the gesture
                 if (prediction.score < App.getMinimumRecognitionScore())
                 {
-                    App.vibrate(true);
-                    return;
+                  App.vibrate(true);
+                  return;
                 }
                 
                 // if the user entered the shortcut gesture, start the app (if any defined in the prefs)
@@ -525,14 +542,27 @@ implements IKeyboardService
                 }
                 
                 int keyCode = KeyEventUtils.keyCodeFromTag(prediction.name);
+                
                 if (keyCode == KeyEvent.KEYCODE_UNKNOWN)
                 {
-                    mViewModel.sendText(prediction.name);
+                  mViewModel.sendText(prediction.name);
+                  return;
                 }
-                else
+                
+                // if this is a single-tap but not long enough, do NOT go into special mode
+                if (keyCode == KeyEvent.KEYCODE_PERIOD)
                 {
-                    mViewModel.key(keyCode);
+                  if(!mViewModel.isSpecialOn())
+                  {
+                    if(gestureDuration < App.getSpecialModeTapDelay())
+                    {
+                      return;
+                    }
+                  }
                 }
+
+                // otherwise, send the key along
+                mViewModel.key(keyCode);
             }
 
             private int makeFlags()

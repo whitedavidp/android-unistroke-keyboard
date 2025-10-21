@@ -9,12 +9,16 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
-public class SettingsActivity extends Activity implements OnClickListener
+public class SettingsActivity extends Activity implements OnClickListener, OnItemSelectedListener
 {
   private TextView txtAppInfo = null;
   private CheckBox chkFiles = null;
@@ -28,6 +32,7 @@ public class SettingsActivity extends Activity implements OnClickListener
   private Button btnShowHelp = null;
   private Button btnSetShortcutApp = null;
   private EditText editMinimumRecognition = null;
+  private Spinner spinSpecialTouchInterval = null;
 
   @Override
   protected void onCreate(Bundle savedInstanceState)
@@ -63,6 +68,26 @@ public class SettingsActivity extends Activity implements OnClickListener
     editMinimumRecognition.setText(Float.toString(App.getMinimumRecognitionScore()));
     btnSetShortcutApp = (Button) findViewById(R.id.buttonSetShortcutApp);
     btnSetShortcutApp.setOnClickListener(this);
+    spinSpecialTouchInterval = (Spinner) findViewById(R.id.spinSpecialTouchInterval);
+    ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, App.SPECIAL_MODE_TAP_DURATIONS);
+    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    spinSpecialTouchInterval.setAdapter(adapter);
+    spinSpecialTouchInterval.setOnItemSelectedListener(this);
+    spinSpecialTouchInterval.setSelection(getSpecialTouchIntervalPosition());
+  }
+  
+  private int getSpecialTouchIntervalPosition()
+  {
+    long delay = App.getSpecialModeTapDelay();
+    for(int i=0; i < App.SPECIAL_MODE_TAP_DURATIONS.length; i++)
+    {
+      if(Long.parseLong(App.SPECIAL_MODE_TAP_DURATIONS[i]) == delay)
+      {
+        return i;
+      }
+    }
+    
+    return 0;
   }
 
   @Override
@@ -187,5 +212,19 @@ public class SettingsActivity extends Activity implements OnClickListener
     }
 
     App.setMinimumRecognitionScore(newValue);
+  }
+
+  @Override
+  public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3)
+  {
+    App.setSpecialModeTapDelay(Long.parseLong(App.SPECIAL_MODE_TAP_DURATIONS[position]));
+    App.showToast(getString(R.string.special_mode_tap) + App.SPECIAL_MODE_TAP_DURATIONS[position]);
+  }
+
+  @Override
+  public void onNothingSelected(AdapterView<?> arg0)
+  {
+    // do nothing
+    
   }
 }

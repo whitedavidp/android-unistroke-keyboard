@@ -39,4 +39,7 @@
 	<string name="shortcut_app_missing">The configured shortcut app is missing or cannot be launched</string>
 	<string name="current_app">Current shortcut app:&#160;</string>
 	<string name="no_changes">No changes applied</string>
+	<string name="special_mode_tap">Tap duration to enter special mode is:&#160;</string>
+	<string name="special_mode_tap_duration">Tap duration to enter special mode (usual=125):&#160;</string>
+	<string name="bad_special_tap_duration">Unexpected special tap duration</string>
 </resources>
