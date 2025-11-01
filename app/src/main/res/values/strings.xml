@@ -5,14 +5,14 @@
     <string name="ime_name">Unistroke Keyboard</string>
     <string name="title_activity_help">Unistroke Keyboard Help</string>
     <string name="open_settings_instructions">Press the button below to make sure that this input method is enabled.</string>
-    <string name="open_settings_button">Open system input settings</string>
+    <string name="open_settings_button">Open System Input Settings</string>
     <string name="load_from_files">Load gestures from internal storage (if available)</string>
     <string name="enable_logcat">Use logcat output</string>
     <string name="enable_results">Display prediction results</string>
     <string name="show_help">Show Default Gesture Strokes</string>
     <string name="scroll_and_zoom">Default Gesture Strokes (scrolls and pinch to zoom)</string>
     <string name="reload_gestures_instructions">Press the button below to make sure that changes to gesture files or sources are appplied. Force stop of the app will also work.</string>
-    <string name="reload_gestures">Force Reload of Gestures</string>
+    <string name="reload_gestures">Force Reload Of Gestures</string>
     <string name="credit">Please note that the lion\'s share of the credit for this app must go to its original developer. His project/code is located here: https://github.com/tmatz/android-unistroke-keyboard</string>
     <string name="enable_bitmaps">Use cheat sheet images as gesture backgrounds</string>
     <string name="checking_files">"Files to be checked:&#160;</string>
@@ -29,8 +29,9 @@
   	<string name="long_vibrate_on_error">Extended vibrate on unrecognized gesture</string>
   	<string name="vibrate_on_special">Vibrate when entering "special"</string>
   	<string name="minimum_recognition_score">Min. gesture recognition score (usual=1.5):&#160;</string>
+  	<string name="minimum_recognition">Minimum gesture recognition score:&#160;</string>
 	<string name="default_recognition_score">1.50</string>
-	<string name="crazy_minimum_value">Min. score change ignored - the value entered must be between .5 and 3.0</string>
+	<string name="crazy_minimum_value">Min. score change ignored and reset - the value entered must be between .5 and 3.0</string>
 	<string name="choose_app">Choose Application For Shortcut Gesture</string>
 	<string name="ok">OK</string>
 	<string name="cancel">Cancel</string>
@@ -40,6 +41,84 @@
 	<string name="current_app">Current shortcut app:&#160;</string>
 	<string name="no_changes">No changes applied</string>
 	<string name="special_mode_tap">Tap duration to enter special mode is:&#160;</string>
-	<string name="special_mode_tap_duration">Tap duration to enter special mode (usual=125):&#160;</string>
+	<string name="special_mode_tap_duration">Tap duration to enter special mode (normal=0):&#160;</string>
 	<string name="bad_special_tap_duration">Unexpected special tap duration</string>
+	<string name="multi_stroke_entered">A multi-stroke gesture was input and ignored</string>
+	<string name="library_contains_multi_stroke">A multi-stroke gesture was found in a library with the name:&#160;</string> 
+	<string name="keyboard_shortcuts_text_old">Ctrl+A: Copy selected text\n\nCtrl+X: Cut selected text\n\nCtrl+V: Paste selected text\n\nCtrl+A: Select all text\n\nCtrl+Home: Move the cursor to beginning/end of entire text\n\nCtrl+End: Move the cursor to end of entire text\n\nCtrl+LeftArrow: Move cursor to beginning/end of the current word\n\nCtrl+RightArrow: Move cursor to end of the current word\n\nCtrl+Z: Undo an action</string>
+	<string name="show_shortcuts">Show Keyboard Shortcuts</string>
+	<string name="keyboard_shortcuts">Handy Keyboard Shortcuts</string>
+	<string name="edit_gestures">Edit gestures in:&#160;</string>
+	<string name="bad_gesture_file">Expected gesture file name not supplied - should not happen</string>
+	<string name="gesture_file_error">Error creating gesture file:&#160;</string>
+	<string name="edit_gesture_instructions">In order to make use of any changes you make, be sure you have the Load gestures from internal storage option enabled (and leave it enabled) - also make sure you tap the Force Reload Of Gestures button once you are done editing</string>
+	<string name="test_gesture_instructions">The results shown during testing are relative only to the gestures stored in this one file and the results shown may be different than shown in the keyboard app itself - so this is only an initial indication</string>
+	<string name="dont_remind">Do not remind me again</string>
+	<string name="apply">Apply</string>
+	
+	<string-array name="keyboard_shortcuts_text">
+	   <item>Ctrl+C: Copy selected text</item>
+	   <item>Ctrl+X: Cut selected text</item>
+	   <item>Ctrl+V: Paste selected text</item>
+	   <item>Ctrl+A: Select all text</item>
+	   <item>Ctrl+Z: Undo an action</item>
+	   <item>Ctrl+Home: Move the cursor to beginning of entire text</item>
+	   <item>Ctrl+End: Move the cursor to end of entire text</item>
+	   <item>Ctrl+&#x2190;: Move cursor to beginning of the current word</item>
+	   <item>Ctrl+&#x2192;: Move cursor to end of the current word</item>
+	   <item>Ctrl+Shift+&#x2192;:Select the word to the right of the cursor</item>
+	   <item>Ctrl+Shift+&#x2190;:Select the word to the left of the cursor</item>
+	</string-array>
+	
+	<!-- All of the following are from the GestureBuilder app -->
+    <string name="gesture_builder">Gestures Builder</string>
+    <!-- Title, name of the activity used to create a gesture -->
+    <string name="label_create_gesture">Create a gesture</string>
+
+    <!-- Buttons -->
+    <skip />
+    <!-- Label, button used to add a gesture -->
+    <string name="button_add">Add gesture</string>
+    <!-- Label, button used to reload all gestures -->
+    <string name="button_reload">Reload</string>
+    <!-- Label, button used to cancel the operation of adding a gesture -->
+    <string name="button_discard">Discard</string>
+    <!-- Label, button used to save a gesture newly created -->
+    <string name="button_done">Done</string>
+
+    <!-- Gestures -->
+    <skip />
+    <!-- Label, prompt asking the user to enter the name of the gesture -->
+    <string name="prompt_gesture_name">Name</string>
+    <!-- Error message, informs the user he needs to enter a name before saving a gesture -->
+    <string name="error_missing_name">You must enter a name</string>
+    <!-- success message, tells the user where the gesture was saved -->
+    <string name="save_success">Gesture saved in %s</string>
+    <!-- Buttons in Rename gesture dialog box -->
+    <string name="rename_action">OK</string>
+    <!-- Buttons in Rename gesture dialog box -->
+    <string name="cancel_action">Cancel</string>
+    <!-- Message displayed when the user opens the gestures settings screen -->
+    <string name="gestures_loading">Loading gestures...</string>
+    <!-- Message displayed when the user has no gestures -->
+    <string name="gestures_empty">No gestures</string>
+    <!-- Title of the screen used to view/manage gestures -->
+    <string name="gestures_activity">Gestures</string>
+    <!-- Noun, menu item used to rename a gesture -->
+    <string name="gestures_rename">Rename</string>
+    <!-- Noun, menu item used to remove a gesture -->
+    <string name="gestures_delete">Delete</string>
+    <!-- Message displayed when a gesture is successfully deleted -->
+    <string name="gestures_delete_success">Gesture deleted</string>
+    <!-- Title of dialog box -->
+    <string name="gestures_rename_title">Rename gesture</string>
+    <!-- Label of gesture name field in Rename gesture dialog box -->
+    <string name="gestures_rename_label">Gesture name</string>
+    <!-- Message, displayed when the sdcard cannot be found, 1st parameter is the name of the file that stores the gestures.  CHAR LIMIT=80 -->
+    <string name="gestures_error_loading">Could not load %s. Make sure you have storage available.</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="button_test">Test</string>
+	
 </resources>

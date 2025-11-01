@@ -6,6 +6,20 @@
    
     tools:context="com.whitedavidp.unistroke_keyboard.HelpActivity" >
     
+   	<Button android:id="@+id/buttonShowShortcuts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/show_shortcuts"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:background="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textColor="@color/text_color" />
+    
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,5 +40,5 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
     />
-
+    
 </LinearLayout>

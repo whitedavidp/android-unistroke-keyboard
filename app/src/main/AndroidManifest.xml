@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.whitedavidp.unistroke_keyboard"
-    android:versionCode="10"
-    android:versionName="1.0.9" >
+    android:versionCode="11"
+    android:versionName="2.0.0" >
 
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
         <uses-sdk
         android:minSdkVersion="4"
@@ -51,6 +51,20 @@
             android:theme="@android:style/Theme.Dialog"
             android:label="@string/title_activity_help" >
         </activity>
+        
+        <activity
+            android:name=".gesturebuilder.GestureBuilderActivity"
+            android:icon="@drawable/ic_gesturebuilder"
+            android:label="@string/gesture_builder" >
+        </activity>
+ 
+        <activity
+            android:name=".gesturebuilder.CreateGestureActivity"
+            android:label="@string/label_create_gesture" />
+        
+        <activity
+            android:name=".gesturebuilder.TestActivity"
+            android:label="@string/title_activity_test" />
     </application>
 
 </manifest>

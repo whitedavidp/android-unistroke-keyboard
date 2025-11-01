@@ -1,13 +1,18 @@
 package com.whitedavidp.unistroke_keyboard;
 
 import android.content.Context;
-import android.gesture.Gesture;
-import android.gesture.GestureLibraries;
-import android.gesture.GestureLibrary;
-import android.gesture.Prediction;
+
+import com.whitedavidp.unistroke_keyboard.gesture.Gesture;
+import com.whitedavidp.unistroke_keyboard.gesture.GestureLibraries;
+import com.whitedavidp.unistroke_keyboard.gesture.GestureLibrary;
+import com.whitedavidp.unistroke_keyboard.gesture.Prediction;
+
 import android.os.Environment;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.Set;
 
 class GestureStore
 {
@@ -33,6 +38,15 @@ class GestureStore
     public PredictionResult recognize(Gesture gesture, int flags)
     {
         PredictionResult prediction = PredictionResult.Zero;
+        
+        // if the user manages to enter a multi-stroke, inform and ignore it
+        if(gesture.getStrokesCount() > 1)
+        {
+          String s = App.getAppContext().getString(R.string.multi_stroke_entered);
+          App.showToast(s);
+          App.log("GestureStore", s);
+          return prediction;
+        }
 
         for (WeightedGestureLibrary library: libraries)
         {
@@ -78,36 +92,8 @@ class GestureStore
 
         public WeightedGestureLibrary load(double weight, int rawId, int category)
         {
-            String fileName = null;
-            GestureLibrary library = null;
-            
-            switch(rawId)
-            {
-              case R.raw.gestures_alphabet:
-              {
-                fileName = "gestures_alphabet";
-                break;
-              }
-              case R.raw.gestures_number:
-              {
-                fileName = "gestures_number";
-                break;
-              }
-              case R.raw.gestures_special:
-              {
-                fileName = "gestures_special";
-                break;
-              }
-              case R.raw.gestures_control:
-              {
-                fileName = "gestures_control";
-                break;
-              }  
-              default:
-              {
-                fileName = null;
-              }
-            }
+            GestureLibrary library = null;           
+            String fileName = App.mapGestureResourceIdToFileName(rawId);
             
             if(App.isLoadFromFilesEnabled())
             {
@@ -121,35 +107,54 @@ class GestureStore
                   library = GestureLibraries.fromFile(f);
                   if(null != library)
                   {
-                    App.Log(fileName, "gestures for " + fileName + " loaded from storage");
+                    App.log(fileName, "gestures for " + fileName + " loaded from storage");
                   }
                   else
                   {
-                    App.Log(fileName, "gestures for " + fileName + " failed to load from storage");
+                    App.log(fileName, "gestures for " + fileName + " failed to load from storage");
                   }
                 }
                 else
                 {
-                  App.Log(fileName, "File exists: " + f.exists() + ", Can be read: " + f.canRead());
+                  App.log(fileName, "File exists: " + f.exists() + ", Can be read: " + f.canRead());
                 }
               }
             }
             
             if(null == library)
             {
-              App.Log(fileName, "Loading " + fileName + " from resources");
+              App.log(fileName, "Loading " + fileName + " from resources");
               library = GestureLibraries.fromRawResource(context, rawId);
             }
             
-            // note: I fooled around with the settings shown here: https://stackoverflow.com/questions/7743462/does-having-variations-of-gestures-in-gesture-library-improve-recognition
-            // with only worse results. so I leave this as-is. the libraries should be SEQUENCE_SENSITIVE by default
-            library.setOrientationStyle(8);
+            App.preGestureLibraryLoad(library);
+            
             boolean successfulLoad = library.load();
             if(!successfulLoad)
             {
-              App.Log(fileName, "Library " + fileName + " did not load properly");
+              App.log(fileName, "Library " + fileName + " did not load properly");
+            }
+
+            // check the library for unexpected (but possible due to GestureBuilder) multi-strokes
+            long t0 = new Date().getTime();
+            Set<String> gestureNames = library.getGestureEntries();
+            Iterator<String> nameIterator = gestureNames.iterator();
+            while(nameIterator.hasNext())
+            {
+              String gestureName = nameIterator.next();
+              ArrayList<Gesture> gestureEntries = library.getGestures(gestureName);
+              for(int i = 0; i < gestureEntries.size(); i++)
+              {
+                if(gestureEntries.get(i).getStrokesCount() > 1)
+                {
+                  String s = App.getAppContext().getString(R.string.library_contains_multi_stroke);
+                  App.showToast(s + fileName + "/" + gestureName);
+                  App.log("GestureStore", s + gestureName);
+                }
+              }
             }
             
+            App.log(fileName, "processed in " + (new Date().getTime() - t0) + " ms");
             return new WeightedGestureLibrary(library, category, weight);
         }
     }
@@ -174,13 +179,15 @@ class GestureStore
                 return new PredictionResult("period", Double.POSITIVE_INFINITY);
             }
 
-            ArrayList<Prediction> predictions = library.recognize(gesture);
+            ArrayList<Prediction> predictions = null;
+            predictions = library.recognize(gesture);
             if (predictions.size() == 0)
             {
                 return PredictionResult.Zero;
             }
 
-            PredictionResult first = new PredictionResult(predictions.get(0), weight);
+            PredictionResult first = null; 
+            first = new PredictionResult(predictions.get(0), weight);
 
             if ((flags & FLAG_STRICT) == 0)
             {
@@ -196,8 +203,9 @@ class GestureStore
             {
                 return first;
             }
-
-            PredictionResult next = new PredictionResult(predictions.get(1), weight);
+            
+            PredictionResult next = null;
+            next = new PredictionResult(predictions.get(1), weight);
 
             if (first.score < next.score + 0.2)
             {

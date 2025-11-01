@@ -32,7 +32,7 @@ Changes from the original:
 5. Removed various items related to notifications and other stuff that made it difficult to build inside of my old, Eclipse environment.
 
 6. Included the Gesture Builder apk since that is used to modify the raw resources in this app. (Note: this build of Gesture Builder is my own and differs slightly from the one included in the SDK. It has a test activity and the match prediction it displays
-should match that of the keyboard code).
+should match that of the keyboard code). REMOVED in version 2+.
 
 7. Added Graffiti Return/Enter stroke to the common gesture list.
 
@@ -66,5 +66,15 @@ personally prefer an error to a mis-recognition so I am currently setting this i
 
 14. Added pseudo-support for the Graffiti Shortcut gesture to the special gesture list. As this is a unistroke recognizer, I cannot implement the full Graffiti behavior as these require multi-strokes. As near as I could come was to optionally launch a
 settings-specified app upon recognition of the shortcut gesture. This could be a dictionary app, for example. I personally use a clipboard text expansion app which is fairly close to the original Graffiti shortcut function.
+
+15. Integrated the GestureBuilder app from original source code in SDK samples under the package name com.whitedavidp.unistroke_keyboard.gesturebuilder. This requires the change of the permission from READ_EXTERNAL_STORAGE to WRITE_EXTERNAL_STORAGE as
+the whole point of Gesture Builder is to write gestures to internal storage. It will place up to 4 files in your device's internal storage root folder: gestures_alphabet, gestures_number, gestures_special, and gestures_control if you decide to edit them
+from the information stored by default in the app's raw resources. You need only edit the file(s) in which you are interested. But once you do, you must be sure to enable the Load gestures from internal storage option and keep that enabled. Failure to
+do so will result in the app continuing to use the raw resources rather than your modifications. After editing, it is a important to press the Force Reload of Gestures button to ensure that your changes are put into use immediately. Prior to editing,
+the previous file will be kept in the same location with .bak appended as a backup. As a result, the Gesture Builder apk file that was previously included has been removed from the repo.
+
+16. In my seemingly un-ending quest to improve gesture recognition, I have incorporated the entire AOSP android.gesture package into this app under the name com.whitedavidp.unistroke_keyboard.gesture so I can fiddle with the recognition algorithms when
+I simply could not do so before. I already believe that changing the value passed to GestureLibrary.setOrientationStyle() from the "undocumented" value of 8 to 10 seems to make a difference. So I have made that the default and MAY, in the future, allow
+this to be set via an app option.
 
 <img alt="gesture" src="./docs/images/gesture.png" width="400px">

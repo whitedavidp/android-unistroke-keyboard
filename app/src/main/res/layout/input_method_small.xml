@@ -68,7 +68,7 @@
                 android:orientation="horizontal"
                 android:id="@+id/gesture_area">
 
-                <android.gesture.GestureOverlayView
+                <com.whitedavidp.unistroke_keyboard.gesture.GestureOverlayView
                     android:id="@+id/gestures_overlay"
                     android:layout_width="0dip"
                     android:layout_height="match_parent"
@@ -87,9 +87,9 @@
                         android:background="@color/colorPrimaryDark"
                         android:layout_gravity="bottom|right"/>
 
-                </android.gesture.GestureOverlayView>
+                </com.whitedavidp.unistroke_keyboard.gesture.GestureOverlayView>
 
-                <android.gesture.GestureOverlayView
+                <com.whitedavidp.unistroke_keyboard.gesture.GestureOverlayView
                     android:id="@+id/gestures_overlay_num"
                     android:layout_width="0dip"
                     android:layout_height="match_parent"
@@ -108,7 +108,7 @@
                         android:background="@color/colorPrimaryDark"
                         android:layout_gravity="bottom|right"/>
 
-                </android.gesture.GestureOverlayView>
+                </com.whitedavidp.unistroke_keyboard.gesture.GestureOverlayView>
 
             </LinearLayout>
 

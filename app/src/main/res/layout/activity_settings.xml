@@ -21,6 +21,16 @@
 	        android:layout_marginTop="10dp"
 	        android:textStyle="bold"
 	        android:autoLink="web" />
+		
+		<TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/credit"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginRight="20dp"
+	        android:layout_marginBottom="10dp"
+	        android:textStyle="bold"
+	        android:autoLink="web" />
 	    
 	    <Button android:id="@+id/buttonShowHelp"
 	        android:layout_width="wrap_content"
@@ -54,6 +64,37 @@
 	        android:paddingRight="10dp"
 	        android:paddingLeft="10dp"
 	        android:background="@color/colorPrimary" />
+	    
+	    <LinearLayout
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal"
+	        android:layout_marginRight="20dp"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginTop="10dp" 
+	        android:focusableInTouchMode="true"
+	        android:layout_gravity="center_horizontal"
+	        android:focusable="true" >
+	    
+		    <TextView 
+		           android:layout_width="wrap_content"
+		           android:layout_height="wrap_content"
+		           android:text="@string/edit_gestures"
+		           android:textStyle="bold" />
+		    
+		    <Spinner
+		        android:id="@+id/spinGestureSet"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content" />
+		    
+		    <Button
+		        android:id="@+id/buttonEditGestures"
+		        android:layout_width="wrap_content"
+	        	android:layout_height="wrap_content"
+	        	android:text="@string/ok"
+		        android:background="@color/colorPrimary" />
+		    
+	    </LinearLayout>
 	    
 	    <CheckBox android:id="@+id/checkFiles"
 	        android:layout_width="wrap_content"
@@ -108,6 +149,12 @@
 	  		    android:inputType="numberSigned|numberDecimal"
 	  		    android:text="@string/default_recognition_score"
 	  		    android:layout_weight="1" />
+
+	  		<Button android:id="@+id/buttonMinimumRecognition"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/apply"
+		        android:background="@color/colorPrimary" />
 	    </LinearLayout>
 
 	    <LinearLayout
@@ -193,15 +240,6 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="0dp"	/>    
 	    
-	    <TextView
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/credit"
-	        android:layout_marginLeft="20dp"
-	        android:layout_marginRight="20dp"
-	        android:layout_marginTop="10dp"
-	        android:textStyle="bold"
-	        android:autoLink="web" />
-	    
 	</LinearLayout>
 </ScrollView>
+

@@ -11,4 +11,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <!-- All of the following are from the GestureBuilder app -->
+	<dimen name="gesture_thumbnail_inset">8dip</dimen>
+    <dimen name="gesture_thumbnail_size">64dip</dimen>
 </resources>

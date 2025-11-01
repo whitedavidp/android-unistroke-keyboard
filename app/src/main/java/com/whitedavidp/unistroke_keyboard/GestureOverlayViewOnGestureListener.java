@@ -1,6 +1,6 @@
 package com.whitedavidp.unistroke_keyboard;
 
-import android.gesture.GestureOverlayView;
+import com.whitedavidp.unistroke_keyboard.gesture.GestureOverlayView;
 import android.view.MotionEvent;
 
 abstract class GestureOverlayViewOnGestureListener

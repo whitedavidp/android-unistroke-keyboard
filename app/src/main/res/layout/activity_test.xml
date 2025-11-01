@@ -1,0 +1,24 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.whitedavidp.unistroke_keyboard.gesture.GestureOverlayView
+        android:id="@+id/testGestureOverlayView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="65dp"
+        android:gestureStrokeType="single"
+        
+        android:gestureStrokeAngleThreshold="90.0"
+    	android:eventsInterceptionEnabled="true"
+    	android:fadeDuration="0"
+    	android:fadeOffset="0"
+    	android:gestureStrokeWidth="7.0"
+    	android:fadeEnabled="true"
+        
+        android:orientation="horizontal" >
+
+    </com.whitedavidp.unistroke_keyboard.gesture.GestureOverlayView>
+
+</RelativeLayout>

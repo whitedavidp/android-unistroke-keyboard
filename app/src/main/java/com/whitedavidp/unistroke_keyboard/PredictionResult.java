@@ -1,6 +1,8 @@
 package com.whitedavidp.unistroke_keyboard;
 
-import android.gesture.Prediction;
+import com.whitedavidp.unistroke_keyboard.gesture.Prediction;
+
+import dollar.one.DollarOneMatchResult;
 
 class PredictionResult
 {
@@ -25,6 +27,12 @@ class PredictionResult
     {
         this.name = prediction.name;
         this.score = prediction.score * scale;
+    }
+
+    public PredictionResult(DollarOneMatchResult prediction, double scale)
+    {
+        this.name = prediction.getName();
+        this.score = prediction.getScore() * scale;
     }
 
     public PredictionResult choose(PredictionResult other)

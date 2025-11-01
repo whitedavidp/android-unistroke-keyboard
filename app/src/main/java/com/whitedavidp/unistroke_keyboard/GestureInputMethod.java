@@ -1,9 +1,10 @@
 package com.whitedavidp.unistroke_keyboard;
 
+import com.whitedavidp.unistroke_keyboard.gesture.Gesture;
+import com.whitedavidp.unistroke_keyboard.gesture.GestureOverlayView;
+
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
-import android.gesture.Gesture;
-import android.gesture.GestureOverlayView;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -101,6 +102,10 @@ implements IKeyboardService
     @Override
     public void onWindowShown() {
         super.onWindowShown();
+        
+        // this is to make sure that changes made to the prefs xml file outside this app get incorporated.
+        // in the long run, this should not be needed as all non-debugging prefs should have get/set methods
+        App.refreshPrefs();
     }
 
     public void updateView()
@@ -302,8 +307,8 @@ implements IKeyboardService
 
         private void setupGestureOverlays(View view)
         {
-            final GestureOverlayView overlay = (GestureOverlayView) view.findViewById(R.id.gestures_overlay);
-            final GestureOverlayView overlayNum = (GestureOverlayView) view.findViewById(R.id.gestures_overlay_num);
+            final com.whitedavidp.unistroke_keyboard.gesture.GestureOverlayView overlay = (com.whitedavidp.unistroke_keyboard.gesture.GestureOverlayView) view.findViewById(R.id.gestures_overlay);
+            final com.whitedavidp.unistroke_keyboard.gesture.GestureOverlayView overlayNum = (com.whitedavidp.unistroke_keyboard.gesture.GestureOverlayView) view.findViewById(R.id.gestures_overlay_num);
             showBackground();
  
             overlay.addOnGestureListener(
@@ -554,7 +559,11 @@ implements IKeyboardService
                 {
                   if(!mViewModel.isSpecialOn())
                   {
-                    if(gestureDuration < App.getSpecialModeTapDelay())
+                    // enforce long tap, if enabled, on gesture to enter special mode
+                    long setting = App.getSpecialModeTapDelay();
+                    App.log("Gesture end", "setting: " + setting + " delay: " + gestureDuration);
+                    
+                    if((setting != App.SPECIAL_MODE_TAP_DELAY_DEFAULT) && (gestureDuration < setting))
                     {
                       return;
                     }
