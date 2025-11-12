@@ -77,4 +77,8 @@ the previous file will be kept in the same location with .bak appended as a back
 I simply could not do so before. I already believe that changing the value passed to GestureLibrary.setOrientationStyle() from the "undocumented" value of 8 to 10 seems to make a difference. So I have made that the default and MAY, in the future, allow
 this to be set via an app option.
 
+17. Not really an addition. But I have spent a ton of time integrating and testing the results of a number of alternative gesture recognizers including $1, $p, 1cent, SiGeR, and the Lua version of $1. The sad result is that none of these produced better
+results than the built-in Android recognizer originally employed in this app. Some were much worse. So any hope of recognition improvements will have to come from either "fiddling" in some way with the original or perhaps incorporating a machine
+learning mechanism - which, I fear, will be too slow to prove useful in this application. So I will leave that to others.
+
 <img alt="gesture" src="./docs/images/gesture.png" width="400px">
